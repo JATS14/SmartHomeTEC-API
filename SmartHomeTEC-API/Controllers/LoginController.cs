@@ -38,8 +38,10 @@ namespace SmartHomeTEC_API.Controllers
         [HttpPost]
         [Route("registrar")]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public respuesta Verificar_registro(Usuario login)
+        public respuesta Verificar_registro(Usuario nuevoUsuario)
         {
+            string jsonString = JsonSerializer.Serialize(nuevoUsuario);
+            Console.WriteLine("Lo que llega de registrarse: "+ jsonString);
             return new respuesta("ok");
         }
 
@@ -63,7 +65,6 @@ namespace SmartHomeTEC_API.Controllers
     public class respuesta
     { 
         public string ingreso;
-        public string status;
 
         public respuesta(string ingreso)
         { 
@@ -74,12 +75,6 @@ namespace SmartHomeTEC_API.Controllers
         {
             get => ingreso;
             set => ingreso = value;
-        }
-
-        public string Status
-        {
-            get => status;
-            set => status = value;
         }
     }
     }
