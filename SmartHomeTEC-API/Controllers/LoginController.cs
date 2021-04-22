@@ -1,4 +1,5 @@
 using System;
+using System.Net;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -12,22 +13,17 @@ namespace SmartHomeTEC_API.Controllers
     [Route("[controller]")]
     public class LoginController: ControllerBase
     {
-        private readonly ILogger<LoginController> _logger;
-        
-        public LoginController(ILogger<LoginController> logger)
-        {
-            _logger = logger;
-        }
-        
         [HttpPost]
+        [Route("verificar")]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public respuesta Verificar_Login(string login)
+        public respuesta Verificar_Login(LoginEntrada login)
         {
             string jsonString = JsonSerializer.Serialize(login);
             Console.WriteLine("Lo que llega: "+ jsonString);
-            /*
             Console.WriteLine("correo: "+ login.correo);
             Console.WriteLine("Contrasena: "+ login.contrasena);
+            
+            
             if (Administrador.login(login.correo, login.contrasena) == "admin")
             {
                 return new respuesta("admin");
@@ -37,17 +33,31 @@ namespace SmartHomeTEC_API.Controllers
                 return new respuesta("usuario");
             }
             return new respuesta("denegar");
-            */
-            return new respuesta("admin");
+        }
+
+        [HttpPost]
+        [Route("registrar")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        public respuesta Verificar_registro(Usuario login)
+        {
+            return new respuesta("ok");
         }
 
 
-
-        
-    public class LoginEntrada
+        public class LoginEntrada
     {
         public string correo;
         public string contrasena;
+
+        public LoginEntrada(string correo, string contrasena)
+        {
+            this.correo = correo;
+            this.contrasena = contrasena;
+        }
+
+        public string Correo => correo;
+
+        public string Contrasena => contrasena;
     }
 
     public class respuesta
@@ -60,6 +70,21 @@ namespace SmartHomeTEC_API.Controllers
             this.ingreso = ingreso;
         }
 
+        public string Ingreso
+        {
+            get => ingreso;
+            set => ingreso = value;
+        }
+
+        public string Status
+        {
+            get => status;
+            set => status = value;
         }
     }
+    }
 }
+/*
+cd C:\Program Files (x86)\Google\Chrome\Application
+chrome.exe chromium-browser --disable-web-security --user-data-dir="C:\Users\adria\Documents"
+*/

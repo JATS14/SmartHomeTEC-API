@@ -20,7 +20,14 @@ namespace SmartHomeTEC_API
             List<Dispositivo> nuevaList = new List<Dispositivo>();
             nuevaList.Add(ob1);
             nuevaList.Add(ob2);
-            Administrador host = new Administrador(new List<Usuario>(), nuevaList);
+
+            Usuario us1 = new Usuario("Usuario","uno","Costa Rica","Cartago","usuario1",
+                                    "123","Guadalupe");
+
+            List<Usuario> listUsuario = new List<Usuario>();
+            listUsuario.Add(us1);
+            
+            Administrador host = new Administrador(listUsuario, nuevaList);
             
             CreateHostBuilder(args).Build().Run();
         }

@@ -24,7 +24,7 @@ namespace SmartHomeTEC_API.API
                 if (lista_Usuarios[i].correo.Equals(loginCorreo) &&
                     lista_Usuarios[i].Contrasena.Equals(loginContrasena))
                 {
-                    return "Usuario";
+                    return "usuario";
                 }
             }
             
