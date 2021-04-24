@@ -79,7 +79,3 @@ namespace SmartHomeTEC_API.Controllers
     }
     }
 }
-/*
-cd C:\Program Files (x86)\Google\Chrome\Application
-chrome.exe chromium-browser --disable-web-security --user-data-dir="C:\Users\adria\Documents"
-*/
