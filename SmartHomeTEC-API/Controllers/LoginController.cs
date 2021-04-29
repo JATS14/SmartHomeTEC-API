@@ -7,6 +7,7 @@ using SmartHomeTEC_API.API;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
+
 namespace SmartHomeTEC_API.Controllers
 {
     [ApiController]
@@ -60,22 +61,6 @@ namespace SmartHomeTEC_API.Controllers
         public string Correo => correo;
 
         public string Contrasena => contrasena;
-    }
-
-    public class respuesta
-    { 
-        public string ingreso;
-
-        public respuesta(string ingreso)
-        { 
-            this.ingreso = ingreso;
-        }
-
-        public string Ingreso
-        {
-            get => ingreso;
-            set => ingreso = value;
-        }
     }
     }
 }
