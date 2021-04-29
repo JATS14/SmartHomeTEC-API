@@ -8,12 +8,15 @@ namespace SmartHomeTEC_API.API
         static public IList<Usuario> lista_Usuarios;
         static public IList<Dispositivo> lista_Dispositivos;
         static public IList<Tipo> Lista_tipos;
+        static public IList<Distribuidor> lista_Distribuidores;
 
-        public Administrador(IList<Usuario> listaUsuarios , IList<Dispositivo> listaDispositivos, IList<Tipo> Listatipos)
+        public Administrador(IList<Usuario> listaUsuarios , IList<Dispositivo> listaDispositivos, IList<Tipo> Listatipos,
+                            IList<Distribuidor> listaDistribuidores)
         {
             lista_Usuarios = listaUsuarios;
             lista_Dispositivos = listaDispositivos;
             Lista_tipos = Listatipos;
+            lista_Distribuidores = listaDistribuidores;
         }
 
         public static string login(string loginCorreo, string loginContrasena)
@@ -42,10 +45,17 @@ namespace SmartHomeTEC_API.API
         {
             return Lista_tipos;
         }
+
+        public static IList<Distribuidor> getDistribuidores()
+        {
+            return lista_Distribuidores;
+        }
         public static void adregar_Dispositivo(Dispositivo disp)
         {
             lista_Dispositivos.Add(disp);
         }
+        
+        
         
         /********************************************************************
          *                   Gestinar Dispositivos 

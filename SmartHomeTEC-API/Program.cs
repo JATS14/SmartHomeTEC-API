@@ -20,6 +20,13 @@ namespace SmartHomeTEC_API
             List<Tipo> listaTipos = new List<Tipo>();
             listaTipos.Add(tipo1);
             listaTipos.Add(tipo2);
+
+            Distribuidor distribuidor1 = new Distribuidor("Nombre1", 123456, "region1");
+            Distribuidor distribuidor2 = new Distribuidor("Nombre2", 123456, "region2");
+
+            List<Distribuidor> listDitribuidor = new List<Distribuidor>();
+            listDitribuidor.Add(distribuidor1);
+            listDitribuidor.Add(distribuidor2);
             
             
             Dispositivo ob1 = new Dispositivo("objeto1",100,tipo1,123456,"Marca1",100);
@@ -35,7 +42,7 @@ namespace SmartHomeTEC_API
             List<Usuario> listUsuario = new List<Usuario>();
             listUsuario.Add(us1);
             
-            Administrador host = new Administrador(listUsuario, nuevaList,listaTipos);
+            Administrador host = new Administrador(listUsuario, nuevaList,listaTipos,listDitribuidor);
             
             CreateHostBuilder(args).Build().Run();
         }
