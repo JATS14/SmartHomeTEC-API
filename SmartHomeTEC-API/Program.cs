@@ -31,10 +31,12 @@ namespace SmartHomeTEC_API
             
             Dispositivo ob1 = new Dispositivo("objeto1",100,tipo1,123456,"Marca1",100);
             Dispositivo ob2 = new Dispositivo("objeto2",200,tipo2,987654,"Marca2",200);
+            Dispositivo ob3 = new Dispositivo("objeto3",200,tipo2,987654,"Marca2",200);
 
             List<Dispositivo> nuevaList = new List<Dispositivo>();
             nuevaList.Add(ob1);
             nuevaList.Add(ob2);
+            nuevaList.Add(ob3);
 
             Usuario us1 = new Usuario("Usuario","uno","Costa Rica","Cartago","usuario1",
                                     "123","Guadalupe");

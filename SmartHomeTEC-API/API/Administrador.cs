@@ -143,18 +143,18 @@ namespace SmartHomeTEC_API.API
             IList<Dispositivo> list = new List<Dispositivo>();
             for (int i = 0; i < lista_Dispositivos.Count; i++)
             {
-                if (lista_Dispositivos[i].nombre.Equals(queBusca))
+                if (lista_Dispositivos[i].nombre.Equals(queBusca, StringComparison.OrdinalIgnoreCase))
                 { list.Add(lista_Dispositivos[i]); }
             
-                if (lista_Dispositivos[i].tipo.nombre.Equals(queBusca))
+                if (lista_Dispositivos[i].tipo.nombre.Equals(queBusca, StringComparison.OrdinalIgnoreCase))
                 { list.Add(lista_Dispositivos[i]);  }
             
-                if (lista_Dispositivos[i].marca.Equals(queBusca))
+                if (lista_Dispositivos[i].marca.Equals(queBusca, StringComparison.OrdinalIgnoreCase))
                 { list.Add(lista_Dispositivos[i]);  }
                 
             }
             
-            return null;
+            return list;
         }
 
     }

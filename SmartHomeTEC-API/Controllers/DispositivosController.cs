@@ -19,9 +19,11 @@ namespace SmartHomeTEC_API.Controllers
         [HttpPost]
         [Route("agregarDispositivo")]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public respuesta insertarDispositivo(Dispositivo dispositivo)
+        public respuesta insertarDispositivo(dispositivoEntrada dispositivo)
         {
-            Administrador.adregar_Dispositivo(dispositivo);
+            string jsonString = JsonSerializer.Serialize(dispositivo);
+            Console.WriteLine("Lo que llega de Insertar Usuario: "+ jsonString);
+            //Administrador.adregar_Dispositivo(dispositivo);
             return new respuesta("agregado"); 
         }
         
@@ -49,9 +51,11 @@ namespace SmartHomeTEC_API.Controllers
         [HttpPost]
         [Route("buscarDispositivo")]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public IList<Dispositivo> buscar_dispositivo(entrada entrada)
+        public IList<Dispositivo> buscar_dispositivo(busquedaEntrada entrada)
         {
-            return Administrador.buscar_Dispositivo(entrada.entrada1);
+            string jsonString = JsonSerializer.Serialize(entrada);
+            Console.WriteLine("Lo que llega de Buscar Dispositivo: "+ jsonString);
+            return Administrador.buscar_Dispositivo(entrada.BusquedaEnt);
         }
 
         
@@ -87,8 +91,79 @@ namespace SmartHomeTEC_API.Controllers
                 get => editarS;
                 set => editarS = value;
             }
-        } 
+        }
+
+        public class dispositivoEntrada
+        {
+            public string nombre;
+            public int precio;
+            public string tipo;
+            public int numero_Serie;
+            public string marca;
+            public int consumo_Electrico;
+
+            public dispositivoEntrada(string nombre, int precio, string tipo, int numeroSerie, string marca, int consumoElectrico)
+            {
+                this.nombre = nombre;
+                this.precio = precio;
+                this.tipo = tipo;
+                numero_Serie = numeroSerie;
+                this.marca = marca;
+                consumo_Electrico = consumoElectrico;
+            }
+
+            public string Nombre
+            {
+                get => nombre;
+                set => nombre = value;
+            }
+
+            public int Precio
+            {
+                get => precio;
+                set => precio = value;
+            }
+
+            public string Tipo
+            {
+                get => tipo;
+                set => tipo = value;
+            }
+
+            public int NumeroSerie
+            {
+                get => numero_Serie;
+                set => numero_Serie = value;
+            }
+
+            public string Marca
+            {
+                get => marca;
+                set => marca = value;
+            }
+
+            public int ConsumoElectrico
+            {
+                get => consumo_Electrico;
+                set => consumo_Electrico = value;
+            }
+            
+            
+        }
+
+        public class busquedaEntrada
+        {
+            private string busquedaEnt;
+
+            public busquedaEntrada(string busquedaEnt)
+            {
+                this.busquedaEnt = busquedaEnt;
+            }
+
+            public string BusquedaEnt => busquedaEnt;
+        }
         
         
+
     }
 }
