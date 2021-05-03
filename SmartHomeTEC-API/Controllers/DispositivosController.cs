@@ -22,29 +22,38 @@ namespace SmartHomeTEC_API.Controllers
         public respuesta insertarDispositivo(dispositivoEntrada dispositivo)
         {
             string jsonString = JsonSerializer.Serialize(dispositivo);
-            Console.WriteLine("Lo que llega de Insertar Usuario: "+ jsonString);
-            //Administrador.adregar_Dispositivo(dispositivo);
+            Console.WriteLine("Lo que llega de Insertar Dispositivos: "+ jsonString);
+
+            Dispositivo newdispo = new Dispositivo(dispositivo.nombre,dispositivo.precio,
+                                Administrador.obtnenerTipo(dispositivo.tipo),
+                                Administrador.genenerar_Numero_Serie(),dispositivo.marca,dispositivo.consumo_Electrico);
+            
+            
+            Administrador.adregar_Dispositivo(newdispo);
             return new respuesta("agregado"); 
         }
         
         [HttpPost]
         [Route("editarDispositivo")]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public respuesta editar_dispositivo(editar edicion)
+        public respuesta editar_dispositivo(Dispositivo edicion)
         {
-            int resp = Administrador.editar_Dispositivo(edicion.queEditar,edicion.nombre,edicion.editarS);
-            if (resp == 1){
-                return new respuesta("exito");
-            }
+            string jsonString = JsonSerializer.Serialize(edicion);
+            Console.WriteLine("Lo que llega de Insertar Usuario: "+ jsonString);
+            //int resp = Administrador.editar_Dispositivo(edicion.queEditar,edicion.nombre,edicion.editarS);
+            //if (resp == 1){
+            //    return new respuesta("exito");
+            //}
             return new respuesta("error");
         }
         [HttpPost]
         [Route("eliminarDispositivo")]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public respuesta eliminar_dispositivo(entrada nombre)
+        public respuesta eliminar_dispositivo(Dispositivo entrada)
         {
-            Console.WriteLine("Lo que llega de eliminar Dispositivo: "+ nombre.entrada1);
-            Administrador.eliminar_Dispositivo(nombre.entrada1);
+            string jsonString = JsonSerializer.Serialize(entrada);
+            Console.WriteLine("Lo que llega de Buscar Dispositivo: "+ jsonString);
+            Administrador.eliminar_Dispositivo(entrada.nombre);
             return new respuesta("exito");
         }
         

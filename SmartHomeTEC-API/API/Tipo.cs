@@ -4,13 +4,13 @@ namespace SmartHomeTEC_API.API
     {
         public string nombre;
         public string descripcion;
-        public int tiempoGrarantia;
+        public int tiempoGarantia;
 
-        public Tipo(string nombre, string descripcion, int tiempoGrarantia)
+        public Tipo(string nombre, string descripcion, int tiempoGarantia)
         {
             this.nombre = nombre;
             this.descripcion = descripcion;
-            this.tiempoGrarantia = tiempoGrarantia;
+            this.tiempoGarantia = tiempoGarantia;
         }
 
         public string Nombre
@@ -25,10 +25,10 @@ namespace SmartHomeTEC_API.API
             set => descripcion = value;
         }
 
-        public int TiempoGrarantia
+        public int TiempoGarantia
         {
-            get => tiempoGrarantia;
-            set => tiempoGrarantia = value;
+            get => tiempoGarantia;
+            set => tiempoGarantia = value;
         }
     }
 }

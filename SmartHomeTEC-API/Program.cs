@@ -21,17 +21,17 @@ namespace SmartHomeTEC_API
             listaTipos.Add(tipo1);
             listaTipos.Add(tipo2);
 
-            Distribuidor distribuidor1 = new Distribuidor("Nombre1", 123456, "region1");
-            Distribuidor distribuidor2 = new Distribuidor("Nombre2", 123456, "region2");
+            Distribuidor distribuidor1 = new Distribuidor("Nombre1", 1234567, "region1");
+            Distribuidor distribuidor2 = new Distribuidor("Nombre2", 1234568, "region2");
 
             List<Distribuidor> listDitribuidor = new List<Distribuidor>();
             listDitribuidor.Add(distribuidor1);
             listDitribuidor.Add(distribuidor2);
             
             
-            Dispositivo ob1 = new Dispositivo("objeto1",100,tipo1,123456,"Marca1",100);
-            Dispositivo ob2 = new Dispositivo("objeto2",200,tipo2,987654,"Marca2",200);
-            Dispositivo ob3 = new Dispositivo("objeto3",200,tipo2,987654,"Marca2",200);
+            Dispositivo ob1 = new Dispositivo("objeto1",100,tipo1,1230,"Marca1",100);
+            Dispositivo ob2 = new Dispositivo("objeto2",200,tipo2,1231,"Marca2",200);
+            Dispositivo ob3 = new Dispositivo("objeto3",200,tipo2,1232,"Marca2",200);
 
             List<Dispositivo> nuevaList = new List<Dispositivo>();
             nuevaList.Add(ob1);

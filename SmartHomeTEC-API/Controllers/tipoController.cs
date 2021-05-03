@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using SmartHomeTEC_API.API;
+using Microsoft.AspNetCore.Http;
 
 namespace SmartHomeTEC_API.Controllers
 {
@@ -20,6 +21,7 @@ namespace SmartHomeTEC_API.Controllers
         public IList<Tipo> Get()
         {
             return Administrador.getTipo();
-        }  
+        }
     }
+
 }

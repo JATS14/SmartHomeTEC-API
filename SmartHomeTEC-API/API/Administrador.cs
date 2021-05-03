@@ -9,6 +9,8 @@ namespace SmartHomeTEC_API.API
         static public IList<Dispositivo> lista_Dispositivos;
         static public IList<Tipo> Lista_tipos;
         static public IList<Distribuidor> lista_Distribuidores;
+        
+        static private Tipo TipoOtros = new Tipo("Otros","Objetos de Uso vario",3);
 
         public Administrador(IList<Usuario> listaUsuarios , IList<Dispositivo> listaDispositivos, IList<Tipo> Listatipos,
                             IList<Distribuidor> listaDistribuidores)
@@ -17,6 +19,7 @@ namespace SmartHomeTEC_API.API
             lista_Dispositivos = listaDispositivos;
             Lista_tipos = Listatipos;
             lista_Distribuidores = listaDistribuidores;
+            Lista_tipos.Add(TipoOtros);
         }
 
         public static string login(string loginCorreo, string loginContrasena)
@@ -156,6 +159,93 @@ namespace SmartHomeTEC_API.API
             
             return list;
         }
+        //
+        // Entrada:
+        // Salida:
+        // Restricciones:
+        public static int genenerar_Numero_Serie()
+        {
+            
+            int numeroSerie = 1230;
 
+            if (lista_Dispositivos.Count == 0)
+            {
+                return numeroSerie;
+            }
+
+            return numeroSerie + lista_Dispositivos.Count;
+        }
+        /********************************************************************
+         *                   Gestinar Tipo 
+         *****************************/
+        //
+        // Entrada:
+        // Salida:
+        // Restricciones:
+        public static Tipo obtnenerTipo(string nombre)
+        {
+            for (int i = 0; i < Lista_tipos.Count; i++)
+            {
+                if (Lista_tipos[i].nombre.Equals(nombre))
+                {
+                    return Lista_tipos[i];
+                } 
+                
+            }
+            return TipoOtros;
+        }
+        
+        //
+        // Entrada:
+        // Salida:
+        // Restricciones:
+        public static void insertar_Tipo(Tipo tipo)
+        {
+            Lista_tipos.Add(tipo);
+        }
+        
+        //
+        // Entrada:
+        // Salida:
+        // Restricciones:
+        public static void editar_Tipo(Tipo tipo)
+        {
+            return;
+        }
+        
+        //
+        // Entrada:
+        // Salida:
+        // Restricciones:
+        public static IList<Tipo> Buscar_Tipo(string busqueda)
+        {
+            IList<Tipo> list = new List<Tipo>();
+            for (int i = 0; i < Lista_tipos.Count; i++)
+            {
+                if (Lista_tipos[i].nombre.Equals(busqueda, StringComparison.OrdinalIgnoreCase))
+                { list.Add(Lista_tipos[i]); }
+
+                if (Lista_tipos[i].descripcion.Equals(busqueda, StringComparison.OrdinalIgnoreCase))
+                { list.Add(Lista_tipos[i]); }
+            }
+            return list;
+        }
+        
+        //
+        // Entrada:
+        // Salida:
+        // Restricciones:
+        public static void eliminar_Tipo(string nombre)
+        {
+            for (int i = 0; i < Lista_tipos.Count; i++)
+            {
+                if (Lista_tipos[i].nombre.Equals(nombre))
+                {
+                    Lista_tipos.RemoveAt(i);
+                }
+            }
+        }
+        
+        
     }
 }
