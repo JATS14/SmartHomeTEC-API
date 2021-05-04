@@ -36,7 +36,7 @@ namespace SmartHomeTEC_API.Controllers
         [HttpPost]
         [Route("editarDispositivo")]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public respuesta editar_dispositivo(Dispositivo edicion)
+        public respuesta editar_dispositivo(dispositivoEntradaEditado edicion)
         {
             string jsonString = JsonSerializer.Serialize(edicion);
             Console.WriteLine("Lo que llega de Insertar Usuario: "+ jsonString);
@@ -44,7 +44,7 @@ namespace SmartHomeTEC_API.Controllers
             //if (resp == 1){
             //    return new respuesta("exito");
             //}
-            return new respuesta("error");
+            return new respuesta("exito");
         }
         [HttpPost]
         [Route("eliminarDispositivo")]
@@ -159,6 +159,64 @@ namespace SmartHomeTEC_API.Controllers
             
             
         }
+        
+        public class dispositivoEntradaEditado
+        {
+            public string nombreEditar;
+            public int precioEditar;
+            public string tipoEditar;
+            public int numero_SerieEditar;
+            public string marcaEditar;
+            public int consumo_ElectricoEditar;
+
+            public dispositivoEntradaEditado(string nombreEditar, int precioEditar, string tipoEditar, int numeroSerieEditar, string marcaEditar, int consumoElectricoEditar)
+            {
+                this.nombreEditar = nombreEditar;
+                this.precioEditar = precioEditar;
+                this.tipoEditar = tipoEditar;
+                numero_SerieEditar = numeroSerieEditar;
+                this.marcaEditar = marcaEditar;
+                consumo_ElectricoEditar = consumoElectricoEditar;
+            }
+
+            public string NombreEditar
+            {
+                get => nombreEditar;
+                set => nombreEditar = value;
+            }
+
+            public int PrecioEditar
+            {
+                get => precioEditar;
+                set => precioEditar = value;
+            }
+
+            public string TipoEditar
+            {
+                get => tipoEditar;
+                set => tipoEditar = value;
+            }
+
+            public int NumeroSerieEditar
+            {
+                get => numero_SerieEditar;
+                set => numero_SerieEditar = value;
+            }
+
+            public string MarcaEditar
+            {
+                get => marcaEditar;
+                set => marcaEditar = value;
+            }
+
+            public int ConsumoElectricoEditar
+            {
+                get => consumo_ElectricoEditar;
+                set => consumo_ElectricoEditar = value;
+            }
+        }
+        
+        
 
         public class busquedaEntrada
         {
