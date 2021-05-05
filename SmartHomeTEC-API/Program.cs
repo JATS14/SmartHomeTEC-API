@@ -40,9 +40,12 @@ namespace SmartHomeTEC_API
 
             Usuario us1 = new Usuario("Usuario","uno","Costa Rica","Cartago","usuario1",
                                     "123","Guadalupe");
+            Usuario us2 = new Usuario("Usuario","dos","Costa Rica","San Jose","usuario2",
+                "123","centro");
 
             List<Usuario> listUsuario = new List<Usuario>();
             listUsuario.Add(us1);
+            listUsuario.Add(us2);
             
             Administrador host = new Administrador(listUsuario, nuevaList,listaTipos,listDitribuidor);
             

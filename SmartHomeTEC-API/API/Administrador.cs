@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 
 namespace SmartHomeTEC_API.API
 {
@@ -9,6 +10,7 @@ namespace SmartHomeTEC_API.API
         static public IList<Dispositivo> lista_Dispositivos;
         static public IList<Tipo> Lista_tipos;
         static public IList<Distribuidor> lista_Distribuidores;
+        static public Usuario usuarioActual;
         
         static private Tipo TipoOtros = new Tipo("Otros","Objetos de Uso vario",3);
 
@@ -57,7 +59,21 @@ namespace SmartHomeTEC_API.API
         {
             lista_Dispositivos.Add(disp);
         }
-        
+
+        public static void cambiarUsuarioActual(string correo)
+        {
+            for (int i = 0; i < lista_Usuarios.Count; i++)
+            {
+                if (lista_Usuarios[i].correo.Equals(correo))
+                {
+                    usuarioActual = lista_Usuarios[i];
+                }
+            }
+        }
+        public static Usuario obtenerUsuarioActual( )
+        {
+            return usuarioActual;
+        }
         
         
         /********************************************************************
