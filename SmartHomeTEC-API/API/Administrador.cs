@@ -112,53 +112,19 @@ namespace SmartHomeTEC_API.API
         // Entrada:
         // Salida:
         // Restricciones:
-        public static int editar_Dispositivo(string queEditar, string nombre, string edicion)
+        public static void editar_Dispositivo(Dispositivo dispositivoEditado)
         {
-            if (queEditar == "tipo")
+            for (int i = 0; i < lista_Dispositivos.Count; i++)
             {
-                for (int i = 0; i < lista_Dispositivos.Count; i++)
+                if (lista_Dispositivos[i].numero_Serie.Equals(dispositivoEditado.numero_Serie))
                 {
-                    if (lista_Dispositivos[i].nombre.Equals(nombre))
-                    {
-                        lista_Dispositivos[i].tipo.nombre = edicion;
-                        return 1;
-                    }
+                    lista_Dispositivos[i].nombre = dispositivoEditado.nombre;
+                    lista_Dispositivos[i].precio = dispositivoEditado.precio;
+                    lista_Dispositivos[i].tipo = dispositivoEditado.tipo;
+                    lista_Dispositivos[i].marca = dispositivoEditado.marca;
+                    lista_Dispositivos[i].consumo_Electrico = dispositivoEditado.consumo_Electrico;
                 }
             }
-            if (queEditar == "marca")
-            {
-                for (int i = 0; i < lista_Dispositivos.Count; i++)
-                {
-                    if (lista_Dispositivos[i].nombre.Equals(nombre))
-                    {
-                        lista_Dispositivos[i].marca = edicion;
-                        return 1;
-                    }
-                }
-            }
-            if (queEditar == "precio")
-            {
-                for (int i = 0; i < lista_Dispositivos.Count; i++)
-                {
-                    if (lista_Dispositivos[i].nombre.Equals(nombre))
-                    {
-                        lista_Dispositivos[i].precio = Convert.ToInt32(edicion);
-                        return 1;
-                    }
-                }
-            }
-            if (queEditar == "consumo")
-            {
-                for (int i = 0; i < lista_Dispositivos.Count; i++)
-                {
-                    if (lista_Dispositivos[i].nombre.Equals(nombre))
-                    {
-                        lista_Dispositivos[i].consumo_Electrico = Convert.ToInt32(edicion);
-                        return 1;
-                    }
-                }
-            }
-            return 0;
         }
         //
         // Entrada:

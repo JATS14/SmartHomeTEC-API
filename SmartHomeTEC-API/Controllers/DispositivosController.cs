@@ -39,11 +39,29 @@ namespace SmartHomeTEC_API.Controllers
         public respuesta editar_dispositivo(dispositivoEntradaEditado edicion)
         {
             string jsonString = JsonSerializer.Serialize(edicion);
-            Console.WriteLine("Lo que llega de Insertar Usuario: "+ jsonString);
-            //int resp = Administrador.editar_Dispositivo(edicion.queEditar,edicion.nombre,edicion.editarS);
-            //if (resp == 1){
-            //    return new respuesta("exito");
-            //}
+            Console.WriteLine("Lo que llega de Editar Usuario: "+ jsonString);
+
+            int index = -1;
+            for (int i = 0; i < Administrador.lista_Dispositivos.Count; i++)
+            {
+                if (Administrador.Lista_tipos[i].nombre.Equals(edicion.tipoEditar))
+                {
+                    index = i;
+                }
+            }
+
+            Tipo tipoeditar = new Tipo("nombre", "", 0);
+
+            if (index != -1)
+            {
+                tipoeditar = Administrador.Lista_tipos[index];
+            }
+
+            Dispositivo newDisp = new Dispositivo(edicion.nombreEditar, edicion.precioEditar,tipoeditar,
+                            edicion.numero_SerieEditar,edicion.marcaEditar,edicion.consumo_ElectricoEditar);
+
+            Administrador.editar_Dispositivo(newDisp);
+            
             return new respuesta("exito");
         }
         [HttpPost]
