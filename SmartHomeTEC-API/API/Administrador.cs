@@ -70,9 +70,30 @@ namespace SmartHomeTEC_API.API
                 }
             }
         }
+
         public static Usuario obtenerUsuarioActual( )
         {
             return usuarioActual;
+        }
+
+        public static void EditarUsuarioActual(Usuario usuario)
+        {
+            for (int i = 0; i < lista_Usuarios.Count; i++)
+            {
+                if (lista_Usuarios[i].nombre.Equals(obtenerUsuarioActual().nombre))
+                {
+                    lista_Usuarios[i].nombre = usuario.nombre;
+                    lista_Usuarios[i].apellido = usuario.apellido;
+                    lista_Usuarios[i].pais = usuario.pais;
+                    lista_Usuarios[i].region = usuario.region;
+                    lista_Usuarios[i].correo = usuario.correo;
+                    lista_Usuarios[i].Contrasena = usuario.Contrasena;
+                    lista_Usuarios[i].direccion = usuario.direccion;
+                    
+                    cambiarUsuarioActual(lista_Usuarios[i].correo);
+                }
+                
+            }
         }
         
         
