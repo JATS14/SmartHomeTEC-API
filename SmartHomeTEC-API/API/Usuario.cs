@@ -1,3 +1,6 @@
+using System.Collections;
+using System.Collections.Generic;
+
 namespace SmartHomeTEC_API.API
 {
     public class Usuario
@@ -10,6 +13,10 @@ namespace SmartHomeTEC_API.API
         public string correo;
         private string contrasena;
         public string direccion;
+
+        public IList<Dispositivo> lista_Disp_Usuario = new List<Dispositivo>();
+        
+        
         //Constructor, getters y setters
         public Usuario(string nombre, string apellido, string pais, string region, string correo, string contrasena, string direccion)
         {
@@ -63,6 +70,17 @@ namespace SmartHomeTEC_API.API
             get => direccion;
             set => direccion = value;
         }
+
+        public IList<Dispositivo> obtener_lista_Dispositivos()
+        {
+            return lista_Disp_Usuario;
+        }
+        public void agregar_lista_Dispositivos(Dispositivo dispositivo)
+        {
+            lista_Disp_Usuario.Add(dispositivo);
+        }
+        
+        
     }
     
 }

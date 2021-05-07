@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Reflection.Emit;
 using System.Runtime.CompilerServices;
 
 namespace SmartHomeTEC_API.API
@@ -11,6 +12,13 @@ namespace SmartHomeTEC_API.API
         static public IList<Tipo> Lista_tipos;
         static public IList<Distribuidor> lista_Distribuidores;
         static public Usuario usuarioActual;
+        static private int numeroSerieActual = 1230;
+
+        static public int disp_America = 0;
+        static public int disp_Europa = 0;
+        static public int disp_Asia = 0;
+        static public int disp_Africa = 0;
+        static public int disp_Oceania = 0;
         
         static private Tipo TipoOtros = new Tipo("Otros","Objetos de Uso vario",3);
 
@@ -168,15 +176,9 @@ namespace SmartHomeTEC_API.API
         // Restricciones:
         public static int genenerar_Numero_Serie()
         {
-            
-            int numeroSerie = 1230;
-
-            if (lista_Dispositivos.Count == 0)
-            {
-                return numeroSerie;
-            }
-
-            return numeroSerie + lista_Dispositivos.Count;
+            int num = numeroSerieActual;
+            numeroSerieActual++;
+            return num;
         }
         /********************************************************************
          *                   Gestinar Tipo 
@@ -213,7 +215,14 @@ namespace SmartHomeTEC_API.API
         // Restricciones:
         public static void editar_Tipo(Tipo tipo)
         {
-            return;
+            for (int i = 0; i < Lista_tipos.Count; i++)
+            {
+                if (Lista_tipos[i].nombre.Equals(tipo.nombre))
+                {
+                    Lista_tipos[i].descripcion = tipo.descripcion;
+                    Lista_tipos[i].TiempoGarantia = tipo.tiempoGarantia;
+                }
+            }
         }
         
         //
@@ -248,6 +257,96 @@ namespace SmartHomeTEC_API.API
                 }
             }
         }
+        /********************************************************************
+                                     DashBoard 
+         ********************************************************************/
+        
+        //
+        // Entrada:
+        // Salida:
+        // Restricciones:
+        public static int prom_Dispo_usuario()
+        {
+            int promedio = 0;
+            for (int i = 0; i < lista_Usuarios.Count; i++)
+            {
+                promedio = promedio + lista_Usuarios[i].obtener_lista_Dispositivos().Count;
+            }
+            return (promedio/lista_Usuarios.Count);
+        }
+        //
+        // Entrada:
+        // Salida:
+        // Restricciones:
+        public static int cantidad_Dispo()
+        {
+            return (lista_Dispositivos.Count - Administrador.obtener_Disp_Usuarios().Count);
+        }
+        //
+        // Entrada:
+        // Salida:
+        // Restricciones:
+        public static void obtener_Disp_Region()
+        {
+            for (int i = 0; i < lista_Usuarios.Count; i++)
+            {
+                if (lista_Usuarios[i].region.Equals("America"))
+                {disp_America++;}
+                if (lista_Usuarios[i].region.Equals("Europa"))
+                {disp_Europa++;}
+                if (lista_Usuarios[i].region.Equals("Asia"))
+                {disp_Asia++;}
+                if (lista_Usuarios[i].region.Equals("Africa"))
+                {disp_Africa++;}
+                if (lista_Usuarios[i].region.Equals("Oceania"))
+                {disp_Oceania++;}
+            }
+        }
+        //
+        // Entrada:
+        // Salida:
+        // Restricciones:
+        public static IList<Dispositivo> obtener_Disp_Usuarios()
+        {
+            IList<Dispositivo> lista = new List<Dispositivo>();
+            for (int i = 0; i < lista_Usuarios.Count; i++)
+            {
+                for (int j = 0; j < lista_Usuarios[i].lista_Disp_Usuario.Count; j++)
+                {
+                    for (int k = 0; k < lista_Dispositivos.Count; k++)
+                    {
+                        if (lista_Usuarios[i].lista_Disp_Usuario[j].nombre.Equals(lista_Dispositivos[k].nombre))
+                        {
+                            lista.Add(lista_Dispositivos[k]);
+                        }
+                    }
+                }
+            }
+            return lista;
+        }
+        //
+        // Entrada:
+        // Salida:
+        // Restricciones:
+        public static IList<Dispositivo> obtener_Disp_SinUsuarios()
+        {
+            IList<Dispositivo> lista = lista_Dispositivos;
+            for (int i = 0; i < lista_Usuarios.Count; i++)
+            {
+                for (int j = 0; j < lista_Usuarios[i].lista_Disp_Usuario.Count; j++)
+                {
+                    for (int k = 0; k < lista_Dispositivos.Count; k++)
+                    {
+                        if (lista_Usuarios[i].lista_Disp_Usuario[j].nombre.Equals(lista_Dispositivos[k].nombre))
+                        {
+                            lista.RemoveAt(k);
+                        }
+                    }
+                }
+            }
+            return lista;
+        }
+        
         
         
     }

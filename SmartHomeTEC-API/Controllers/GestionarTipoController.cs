@@ -31,7 +31,8 @@ namespace SmartHomeTEC_API.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         public respuesta editar_Tipo(Tipo edicion)
         {
-            return new respuesta("error");
+            Administrador.editar_Tipo(edicion);
+            return new respuesta("exito");
         }
         
         [HttpPost]
