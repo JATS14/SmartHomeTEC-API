@@ -23,8 +23,27 @@ namespace SmartHomeTEC_API.Controllers
             Administrador.EditarUsuarioActual(usuario);
             return new respuesta("exito");
         }
+
+        [HttpPost]
+        [Route("ComparDispositivo")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        public respuesta compar_Dispositivo(Dispositivo disp)
+        {
+            string jsonString = JsonSerializer.Serialize(disp);
+            Console.WriteLine("Lo que llega en Comprar: "+ jsonString);
+            Administrador.comprarDispositivo(disp);
+            return new respuesta("exito");
+        }
         
-        
+        [HttpPost]
+        [Route("DatosDactura")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        public respuesta datosFactura(Factura factura)
+        {
+            string jsonString = JsonSerializer.Serialize(factura);
+            Console.WriteLine("Lo que llega en Datos factura: "+ jsonString);
+            return new respuesta("exito");
+        }
         
     }
 }

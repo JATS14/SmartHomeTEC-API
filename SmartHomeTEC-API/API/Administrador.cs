@@ -330,7 +330,12 @@ namespace SmartHomeTEC_API.API
         // Restricciones:
         public static IList<Dispositivo> obtener_Disp_SinUsuarios()
         {
-            IList<Dispositivo> lista = lista_Dispositivos;
+            IList<Dispositivo> lista = new List<Dispositivo>();
+            for (int i = 0; i < lista_Dispositivos.Count; i++)
+            {
+                lista.Add(lista_Dispositivos[i]);
+            }
+            
             for (int i = 0; i < lista_Usuarios.Count; i++)
             {
                 for (int j = 0; j < lista_Usuarios[i].lista_Disp_Usuario.Count; j++)
@@ -347,7 +352,30 @@ namespace SmartHomeTEC_API.API
             return lista;
         }
         
+        /********************************************************************
+                              Comprar / Factura
+         ********************************************************************/
         
+        //
+        // Entrada:
+        // Salida:
+        // Restricciones:
+        public static void comprarDispositivo(Dispositivo disp)
+        {
+            for (int i = 0; i < lista_Usuarios.Count; i++)
+            {
+                if (lista_Usuarios[i].nombre.Equals(obtenerUsuarioActual().nombre))
+                {
+                    lista_Usuarios[i].lista_Disp_Usuario.Add(disp);
+                }
+            }
+        }
+        
+        
+        
+        /********************************************************************
+                                Reportes Usuario 
+         ********************************************************************/
         
     }
 }
