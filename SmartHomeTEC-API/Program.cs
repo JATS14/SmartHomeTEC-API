@@ -7,6 +7,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using SmartHomeTEC_API.API;
+using SmartHomeTEC_API.BD;
 
 namespace SmartHomeTEC_API
 {
@@ -48,6 +49,11 @@ namespace SmartHomeTEC_API
             listUsuario.Add(us2);
             
             Administrador host = new Administrador(listUsuario, nuevaList,listaTipos,listDitribuidor);
+            
+            
+            // DATA BASE
+            ConexionPostgreSQL conn = new ConexionPostgreSQL();
+            conn.Conectar();
             
             CreateHostBuilder(args).Build().Run();
         }
