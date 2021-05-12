@@ -30,8 +30,12 @@ namespace SmartHomeTEC_API
             
             conn.iniciar_Base_Datos();
 
+            conn.InsertarUsuarioBaseDatos(Administrador.lista_Usuarios[1]);
+            
+            conn.InsertarDispositivoBaseDatos(Administrador.lista_Dispositivos[1]);
+            
             conn.Desconetar();
-
+            
             //CreateHostBuilder(args).Build().Run();
         }
 

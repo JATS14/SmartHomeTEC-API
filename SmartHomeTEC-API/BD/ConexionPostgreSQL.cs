@@ -111,5 +111,28 @@ namespace SmartHomeTEC_API.BD
                 //Console.WriteLine(correoU + " , " + contrasenaU + " , " + nombreU + " , " + apellidoU + " , " + regionU + " , " + paisU + " , " + direccionU);
             }
         }
+
+
+        public void InsertarUsuarioBaseDatos(Usuario usuario)
+        {
+            string queryInsertarUsuario = "INSERT INTO USUARIO ( Correo, Contrasena, Nombre, Apellido, Region, Pais, Direccion) " +  
+             "VALUES('" + usuario.correo + "'," + usuario.Contrasena + ", '" + usuario.nombre + "', '" + usuario.apellido + "', '" + usuario.region + 
+             "', '" + usuario.pais + "', '" + usuario.direccion + "');";
+
+            Console.WriteLine(queryInsertarUsuario);
+            //NpgsqlCommand conectorTipo = new NpgsqlCommand(queryInsertarUsuario, coneccion);
+        }
+        
+        public void InsertarDispositivoBaseDatos(Dispositivo dispositivo)
+        {
+            string queryInsertarDispositivo = "INSERT INTO DISPOSITIVO ( NumeroSerie, Nombre, Precio, Marca, ConsumoElectrico, NombreTipo) " +  
+                                          "VALUES( " + dispositivo.numero_Serie + ", '" + dispositivo.nombre + "', " + dispositivo.precio + ", '" + 
+                                                        dispositivo.marca + "', " + dispositivo.consumo_Electrico + 
+                                          ", '" + dispositivo.tipo.nombre + "');";
+
+            Console.WriteLine(queryInsertarDispositivo);
+            //NpgsqlCommand conectorTipo = new NpgsqlCommand(queryInsertarDispositivo, coneccion);
+        }
+        
     }
 }
