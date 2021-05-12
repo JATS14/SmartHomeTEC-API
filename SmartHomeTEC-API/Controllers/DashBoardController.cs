@@ -42,6 +42,55 @@ namespace SmartHomeTEC_API.Controllers
         {
             return Administrador.obtener_Disp_SinUsuarios();
         }
+        
+        [HttpGet]
+        [Route("ReportesUsuario")]
+        public enviarDatosUsuario ObtenerReportesUsuarioActual()
+        {
+            return new enviarDatosUsuario(1200,15,22,"Computadoras");
+        }
+
+        public class enviarDatosUsuario
+        {
+            public int consumoMensual;
+            public int inicioHoraMasUso;
+            public int finalHoraMasUso;
+            public string TipoDeMayorUso;
+
+            public enviarDatosUsuario(int consumoMensual, int inicioHoraMasUso, int finalHoraMasUso, string tipoDeMayorUso)
+            {
+                this.consumoMensual = consumoMensual;
+                this.inicioHoraMasUso = inicioHoraMasUso;
+                this.finalHoraMasUso = finalHoraMasUso;
+                TipoDeMayorUso = tipoDeMayorUso;
+            }
+
+            public int ConsumoMensual
+            {
+                get => consumoMensual;
+                set => consumoMensual = value;
+            }
+
+            public int InicioHoraMasUso
+            {
+                get => inicioHoraMasUso;
+                set => inicioHoraMasUso = value;
+            }
+
+            public int FinalHoraMasUso
+            {
+                get => finalHoraMasUso;
+                set => finalHoraMasUso = value;
+            }
+
+            public string TipoDeMayorUso1
+            {
+                get => TipoDeMayorUso;
+                set => TipoDeMayorUso = value;
+            }
+        }
+        
+        
 
 
         public class enviarDatosDashBoard
