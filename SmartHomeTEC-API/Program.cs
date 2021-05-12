@@ -15,38 +15,11 @@ namespace SmartHomeTEC_API
     {
         public static void Main(string[] args)
         {
-            Tipo tipo1 = new Tipo("Tipo1", "La descripcion del tipo1",5);
-            Tipo tipo2 = new Tipo("Tipo2", "La descripcion del tipo2",6);
             
             List<Tipo> listaTipos = new List<Tipo>();
-            listaTipos.Add(tipo1);
-            listaTipos.Add(tipo2);
-
-            Distribuidor distribuidor1 = new Distribuidor("Nombre1", 1234567, "region1");
-            Distribuidor distribuidor2 = new Distribuidor("Nombre2", 1234568, "region2");
-
             List<Distribuidor> listDitribuidor = new List<Distribuidor>();
-            listDitribuidor.Add(distribuidor1);
-            listDitribuidor.Add(distribuidor2);
-            
-            
-            Dispositivo ob1 = new Dispositivo("objeto1",100,tipo1,1230,"Marca1",100);
-            Dispositivo ob2 = new Dispositivo("objeto2",200,tipo2,1231,"Marca2",200);
-            Dispositivo ob3 = new Dispositivo("objeto3",200,tipo2,1232,"Marca2",200);
-
             List<Dispositivo> nuevaList = new List<Dispositivo>();
-            nuevaList.Add(ob1);
-            nuevaList.Add(ob2);
-            nuevaList.Add(ob3);
-
-            Usuario us1 = new Usuario("Usuario","uno","Costa Rica","Cartago","usuario1",
-                                    "123","Guadalupe");
-            Usuario us2 = new Usuario("Usuario","dos","Costa Rica","San Jose","usuario2",
-                "123","centro");
-
             List<Usuario> listUsuario = new List<Usuario>();
-            listUsuario.Add(us1);
-            listUsuario.Add(us2);
             
             Administrador host = new Administrador(listUsuario, nuevaList,listaTipos,listDitribuidor);
             
@@ -55,7 +28,11 @@ namespace SmartHomeTEC_API
             ConexionPostgreSQL conn = new ConexionPostgreSQL();
             conn.Conectar();
             
-            CreateHostBuilder(args).Build().Run();
+            conn.iniciar_Base_Datos();
+
+            conn.Desconetar();
+
+            //CreateHostBuilder(args).Build().Run();
         }
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
