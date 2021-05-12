@@ -115,24 +115,116 @@ namespace SmartHomeTEC_API.BD
 
         public void InsertarUsuarioBaseDatos(Usuario usuario)
         {
-            string queryInsertarUsuario = "INSERT INTO USUARIO ( Correo, Contrasena, Nombre, Apellido, Region, Pais, Direccion) " +  
-             "VALUES('" + usuario.correo + "'," + usuario.Contrasena + ", '" + usuario.nombre + "', '" + usuario.apellido + "', '" + usuario.region + 
-             "', '" + usuario.pais + "', '" + usuario.direccion + "');";
-
-            Console.WriteLine(queryInsertarUsuario);
-            //NpgsqlCommand conectorTipo = new NpgsqlCommand(queryInsertarUsuario, coneccion);
+            IDbCommand command = coneccion.CreateCommand();
+            string queryInsertarUsuario = "INSERT INTO USUARIO ( Correo, Contrasena, Nombre, Apellido, Region, Pais, Direccion) VALUES( @CorreoU, @ContrasenaU, @NombreU, @ApellidoU, @RegionU, @PaisU, @DireccionU);";
+            
+            command.CommandText = queryInsertarUsuario;
+            
+            var parameter = command.CreateParameter();
+            parameter.ParameterName = "CorreoU";
+            parameter.Value = usuario.correo;
+            command.Parameters.Add(parameter);
+            
+            parameter = command.CreateParameter();
+            parameter.ParameterName = "ContrasenaU";
+            parameter.Value = usuario.Contrasena;
+            command.Parameters.Add(parameter);
+            
+            parameter = command.CreateParameter();
+            parameter.ParameterName = "NombreU";
+            parameter.Value = usuario.nombre;
+            command.Parameters.Add(parameter);
+            
+            parameter = command.CreateParameter();
+            parameter.ParameterName = "ApellidoU";
+            parameter.Value = usuario.Apellido;
+            command.Parameters.Add(parameter);
+            
+            parameter = command.CreateParameter();
+            parameter.ParameterName = "RegionU";
+            parameter.Value = usuario.Region;
+            command.Parameters.Add(parameter);
+            
+            parameter = command.CreateParameter();
+            parameter.ParameterName = "PaisU";
+            parameter.Value = usuario.Pais;
+            command.Parameters.Add(parameter);
+            
+            parameter = command.CreateParameter();
+            parameter.ParameterName = "DireccionU";
+            parameter.Value = usuario.Direccion;
+            command.Parameters.Add(parameter);
+            
+            command.ExecuteNonQuery();
+            
         }
         
         public void InsertarDispositivoBaseDatos(Dispositivo dispositivo)
         {
-            string queryInsertarDispositivo = "INSERT INTO DISPOSITIVO ( NumeroSerie, Nombre, Precio, Marca, ConsumoElectrico, NombreTipo) " +  
-                                          "VALUES( " + dispositivo.numero_Serie + ", '" + dispositivo.nombre + "', " + dispositivo.precio + ", '" + 
-                                                        dispositivo.marca + "', " + dispositivo.consumo_Electrico + 
-                                          ", '" + dispositivo.tipo.nombre + "');";
+            IDbCommand command = coneccion.CreateCommand();
+            string queryInsertarDispositivo = "INSERT INTO DISPOSITIVO ( NumeroSerie, Nombre, Precio, Marca, ConsumoElectrico, NombreTipo) VALUES( @NumeroSerieD, @NombreD, @PrecioD, @MarcaD, @ConsumoElectricoD, @NombreTipoD);";
 
-            Console.WriteLine(queryInsertarDispositivo);
-            //NpgsqlCommand conectorTipo = new NpgsqlCommand(queryInsertarDispositivo, coneccion);
+            command.CommandText = queryInsertarDispositivo;
+            
+            var parameter = command.CreateParameter();
+            parameter.ParameterName = "NumeroSerieD";
+            parameter.Value = dispositivo.numero_Serie;
+            command.Parameters.Add(parameter);
+            
+            parameter = command.CreateParameter();
+            parameter.ParameterName = "NombreD";
+            parameter.Value = dispositivo.nombre;
+            command.Parameters.Add(parameter);
+            
+            parameter = command.CreateParameter();
+            parameter.ParameterName = "PrecioD";
+            parameter.Value = dispositivo.precio;
+            command.Parameters.Add(parameter);
+            
+            parameter = command.CreateParameter();
+            parameter.ParameterName = "MarcaD";
+            parameter.Value = dispositivo.marca;
+            command.Parameters.Add(parameter);
+            
+            parameter = command.CreateParameter();
+            parameter.ParameterName = "ConsumoElectricoD";
+            parameter.Value = dispositivo.consumo_Electrico;
+            command.Parameters.Add(parameter);
+            
+            parameter = command.CreateParameter();
+            parameter.ParameterName = "NombreTipoD";
+            parameter.Value = dispositivo.tipo.nombre;
+            command.Parameters.Add(parameter);
+            
+            
+            command.ExecuteNonQuery();
         }
-        
+
+        public void InsertarTipoBaseDatos(Tipo tipo)
+        {
+            IDbCommand command = coneccion.CreateCommand();
+            string queryInsertarDispositivo = "INSERT INTO TIPO( Nombre, Descripcion, TiempoGarantia) VALUES( @NombreT, @DescripcionT, @TiempoGarantiaT);";
+            
+            command.CommandText = queryInsertarDispositivo;
+            
+            var parameter = command.CreateParameter();
+            parameter.ParameterName = "NombreT";
+            parameter.Value = tipo.nombre;
+            command.Parameters.Add(parameter);
+            
+            parameter = command.CreateParameter();
+            parameter.ParameterName = "DescripcionT";
+            parameter.Value = tipo.descripcion;
+            command.Parameters.Add(parameter);
+            
+            parameter = command.CreateParameter();
+            parameter.ParameterName = "TiempoGarantiaT";
+            parameter.Value = tipo.tiempoGarantia;
+            command.Parameters.Add(parameter);
+            
+            command.ExecuteNonQuery();
+
+        }
+
     }
 }

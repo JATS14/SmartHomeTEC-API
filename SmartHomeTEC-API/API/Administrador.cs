@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Reflection.Emit;
 using System.Runtime.CompilerServices;
+using SmartHomeTEC_API.BD;
 
 namespace SmartHomeTEC_API.API
 {
@@ -12,13 +13,15 @@ namespace SmartHomeTEC_API.API
         static public IList<Tipo> Lista_tipos;
         static public IList<Distribuidor> lista_Distribuidores;
         static public Usuario usuarioActual;
-        static private int numeroSerieActual = 1230;
+        static private int numeroSerieActual = 1240;
 
         static public int disp_America = 0;
         static public int disp_Europa = 0;
         static public int disp_Asia = 0;
         static public int disp_Africa = 0;
         static public int disp_Oceania = 0;
+        
+        static public ConexionPostgreSQL conn = new ConexionPostgreSQL();
         
         static private Tipo TipoOtros = new Tipo("Otros","Objetos de Uso vario",3);
 
@@ -49,6 +52,12 @@ namespace SmartHomeTEC_API.API
             
             return "denegar";
         }
+        
+        public static void registrarUsuario(Usuario usu)
+        {
+            lista_Usuarios.Add(usu);
+            conn.InsertarUsuarioBaseDatos(usu);
+        }
 
         public static IList<Dispositivo> getDipositivos()
         {
@@ -66,6 +75,7 @@ namespace SmartHomeTEC_API.API
         public static void adregar_Dispositivo(Dispositivo disp)
         {
             lista_Dispositivos.Add(disp);
+            conn.InsertarDispositivoBaseDatos(disp);
         }
 
         public static void cambiarUsuarioActual(string correo)
@@ -115,6 +125,7 @@ namespace SmartHomeTEC_API.API
         public static void insertar_Dispositivo(Dispositivo dispositivo)
         {
             lista_Dispositivos.Add(dispositivo);
+            conn.InsertarDispositivoBaseDatos(dispositivo);
         }
         //
         // Entrada:
@@ -207,6 +218,7 @@ namespace SmartHomeTEC_API.API
         public static void insertar_Tipo(Tipo tipo)
         {
             Lista_tipos.Add(tipo);
+            conn.InsertarTipoBaseDatos(tipo);
         }
         
         //

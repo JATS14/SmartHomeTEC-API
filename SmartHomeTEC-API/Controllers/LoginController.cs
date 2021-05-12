@@ -43,6 +43,8 @@ namespace SmartHomeTEC_API.Controllers
         {
             string jsonString = JsonSerializer.Serialize(nuevoUsuario);
             Console.WriteLine("Lo que llega de registrarse: "+ jsonString);
+
+            Administrador.registrarUsuario(nuevoUsuario);
             return new respuesta("ok");
         }
 

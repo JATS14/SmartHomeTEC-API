@@ -22,21 +22,14 @@ namespace SmartHomeTEC_API
             List<Usuario> listUsuario = new List<Usuario>();
             
             Administrador host = new Administrador(listUsuario, nuevaList,listaTipos,listDitribuidor);
-            
-            
-            // DATA BASE
-            ConexionPostgreSQL conn = new ConexionPostgreSQL();
-            conn.Conectar();
-            
-            conn.iniciar_Base_Datos();
+            Administrador.conn.Conectar();
+            Administrador.conn.iniciar_Base_Datos();
 
-            conn.InsertarUsuarioBaseDatos(Administrador.lista_Usuarios[1]);
-            
-            conn.InsertarDispositivoBaseDatos(Administrador.lista_Dispositivos[1]);
-            
-            conn.Desconetar();
-            
-            //CreateHostBuilder(args).Build().Run();
+
+            //Usuario prueba = new Usuario("Stephanie","Juanilama","USA","America","juanilama@gmail.com","1234","Houston, Texas");
+            //Dispositivo pruebadisp = new Dispositivo("Ratón Inalámbrico",  15000, Administrador.Lista_tipos[9],1240, "Razer", 10);
+
+            CreateHostBuilder(args).Build().Run();
         }
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
