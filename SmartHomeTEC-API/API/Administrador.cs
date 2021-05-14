@@ -10,7 +10,8 @@ using Syncfusion.Pdf.Graphics;
 using Syncfusion.Drawing;
 using System.IO;
 using Microsoft.AspNetCore.Mvc;
-//
+//Clase encargada de control de toda la funcionalidad de la aplicacion
+//ademas contiene las listas de la base de datos y controla las consulatas a esta.
 namespace SmartHomeTEC_API.API
 {
     public class Administrador
@@ -44,7 +45,10 @@ namespace SmartHomeTEC_API.API
             lista_Distribuidores = listaDistribuidores;
             Lista_tipos.Add(TipoOtros);
         }
-
+        // Funcion que verifica el log in proveniente de la pagina wer¿b
+        // Entrada: La entrada es un string con el correo y otro con la contrasena
+        // Salida: esta funcion tiene como salida un string del tipo de usuario que ingresa
+        // Restricciones: las entradas son strings
         public static string login(string loginCorreo, string loginContrasena)
         {
             if (loginCorreo.Equals("admin") && loginContrasena.Equals("123"))
@@ -62,32 +66,46 @@ namespace SmartHomeTEC_API.API
             
             return "denegar";
         }
-        
+        // funcion encargada de registrar unusario nuevo, lo mete en la base de datos
+        // Entrada: la entrada en un usuario previamente creado con todos sus parametros completos
+        // Salida: esta funcion no tiene salida
+        // Restricciones: la entrada tiene que ser un usuario != null
         public static void registrarUsuario(Usuario usu)
         {
             lista_Usuarios.Add(usu);
             conn.InsertarUsuarioBaseDatos(usu);
         }
-
+        //Funcion que retorna la lista de dispostivos en el sistema
+        // Salida: lista de dispositiovs
         public static IList<Dispositivo> getDipositivos()
         {
             return lista_Dispositivos;
         }
+        //Funcion que retorna la lista de Tipos en el sistema
+        // Salida: lista de tipos
         public static IList<Tipo> getTipo()
         {
             return Lista_tipos;
         }
-
+        //Funcion que retorna la lista de distribuidores en el sistema
+        // Salida: lista de distribuidores
         public static IList<Distribuidor> getDistribuidores()
         {
             return lista_Distribuidores;
-        }
+        }       
+        // Funcion que agregar un dispositivo al sistema y base de datos
+        // Entrada: la entrada es un dispositivo antes creado
+        // Salida: esta funcion no tiene salidas
+        // Restricciones: el dispositivo de entrada no puede ser nulo
         public static void adregar_Dispositivo(Dispositivo disp)
         {
             lista_Dispositivos.Add(disp);
             conn.InsertarDispositivoBaseDatos(disp);
         }
-
+        // funcion que camvia elatributo de usuario actual por otro
+        // Entrada: la entrada es el correo de un usuario del sistema
+        // Salida: no posee salidas
+        // Restricciones: la entrada es un string
         public static void cambiarUsuarioActual(string correo)
         {
             for (int i = 0; i < lista_Usuarios.Count; i++)
@@ -98,12 +116,18 @@ namespace SmartHomeTEC_API.API
                 }
             }
         }
-
+        // funcion que retorna el suaario actual en el sistema
+        // Entrada: no tiene entradas
+        // Salida: la salida es el usuario actual del sistema
+        // Restricciones: no tiene restricciones
         public static Usuario obtenerUsuarioActual( )
         {
             return usuarioActual;
         }
-
+        // funcion que edita al usuario actual en linea
+        // Entrada: la entrada es un usuario con los cambios que se desean hacer al usuaior actual  
+        // Salida: esta funcion no tiene salidas
+        // Restricciones: la entrada tiene que ser un usuario != null
         public static void EditarUsuarioActual(Usuario usuario)
         {
             for (int i = 0; i < lista_Usuarios.Count; i++)
@@ -128,19 +152,19 @@ namespace SmartHomeTEC_API.API
         /********************************************************************
          *                   Gestinar Dispositivos 
          *****************************/
-        //
-        // Entrada:
-        // Salida:
-        // Restricciones:
+        // Funcion que inserta un dispositivo nuevo al sistema
+        // Entrada: la entrada es un dispositivo nuevo antes creado
+        // Salida: esta funcion no tiene salidas
+        // Restricciones: el distpositivo nuevo tiene que ser distinto a null
         public static void insertar_Dispositivo(Dispositivo dispositivo)
         {
             lista_Dispositivos.Add(dispositivo);
             conn.InsertarDispositivoBaseDatos(dispositivo);
         }
-        //
-        // Entrada:
-        // Salida:
-        // Restricciones:
+        //funcion encargada de modificar la informacion de un dispositivo en el sistema
+        // Entrada: la entrada es un dispositivo del sistema mcon algun cambio
+        // Salida: no tiene salidas
+        // Restricciones: la restriccion es que el dispostivo != null
         public static void editar_Dispositivo(Dispositivo dispositivoEditado)
         {
             for (int i = 0; i < lista_Dispositivos.Count; i++)
@@ -155,10 +179,10 @@ namespace SmartHomeTEC_API.API
                 }
             }
         }
-        //
-        // Entrada:
-        // Salida:
-        // Restricciones:
+        // funcion que elimina de la base de datos y del sistema un dispositivo
+        // Entrada: la entrada es el nombre de dispositivo a eliminar
+        // Salida: esta funcion no tiene salidas
+        // Restricciones: el nombre es un string de un dispositivo de la base de datos
         public static void eliminar_Dispositivo(string nombre)
         {
             for (int i = 0; i < lista_Dispositivos.Count; i++)
@@ -169,10 +193,10 @@ namespace SmartHomeTEC_API.API
                 }
             }
         }
-        //
-        // Entrada:
-        // Salida:
-        // Restricciones:
+        // funcion que busca en la base de datos algun dispositivo con un texto dado
+        // Entrada: la entrada es un string 
+        // Salida: la salida es una lista de dispositivos que sean iguales a los buscado o nulo si no encuentra nada
+        // Restricciones: no tiene restricciones
         public static IList<Dispositivo> buscar_Dispositivo(string queBusca)
         {
             IList<Dispositivo> list = new List<Dispositivo>();
@@ -191,10 +215,10 @@ namespace SmartHomeTEC_API.API
             
             return list;
         }
-        //
-        // Entrada:
-        // Salida:
-        // Restricciones:
+        // funcion que genera un numero de serie para los dispositivos neuevo y unico
+        // Entrada: no tiene entradas
+        // Salida: la salida es un numero
+        // Restricciones: no tiene restricciones
         public static int genenerar_Numero_Serie()
         {
             int num = numeroSerieActual;
@@ -204,10 +228,10 @@ namespace SmartHomeTEC_API.API
         /********************************************************************
          *                   Gestinar Tipo 
          *****************************/
-        //
-        // Entrada:
-        // Salida:
-        // Restricciones:
+        // funcion que busca un tipo con el nombre dado
+        // Entrada: la entrada es el string de un tipo de la base de datos
+        // Salida: la salida es el tipo encontrado
+        // Restricciones: el nombre es un string y tiene que estar en el sistema
         public static Tipo obtnenerTipo(string nombre)
         {
             for (int i = 0; i < Lista_tipos.Count; i++)
@@ -221,20 +245,20 @@ namespace SmartHomeTEC_API.API
             return TipoOtros;
         }
         
-        //
-        // Entrada:
-        // Salida:
-        // Restricciones:
+        // Funcion que inserta un Tipo nuevo al sistema
+        // Entrada: la entrada es un Tipo nuevo antes creado
+        // Salida: esta funcion no tiene salidas
+        // Restricciones: el Tipo nuevo tiene que ser distinto a null
         public static void insertar_Tipo(Tipo tipo)
         {
             Lista_tipos.Add(tipo);
             conn.InsertarTipoBaseDatos(tipo);
         }
         
-        //
-        // Entrada:
-        // Salida:
-        // Restricciones:
+        //funcion encargada de modificar la informacion de un tipo en el sistema
+        // Entrada: la entrada es un tipo del sistema con algun cambio
+        // Salida: no tiene salidas
+        // Restricciones: la restriccion es que el tipo != null
         public static void editar_Tipo(Tipo tipo)
         {
             for (int i = 0; i < Lista_tipos.Count; i++)
@@ -247,10 +271,10 @@ namespace SmartHomeTEC_API.API
             }
         }
         
-        //
-        // Entrada:
-        // Salida:
-        // Restricciones:
+        // funcion que busca en la base de datos algun tipo con un texto dado
+        // Entrada: la entrada es un string 
+        // Salida: la salida es una lista de tipos que sean iguales a los buscado o nulo si no encuentra nada
+        // Restricciones: no tiene restricciones
         public static IList<Tipo> Buscar_Tipo(string busqueda)
         {
             IList<Tipo> list = new List<Tipo>();
@@ -265,10 +289,10 @@ namespace SmartHomeTEC_API.API
             return list;
         }
         
-        //
-        // Entrada:
-        // Salida:
-        // Restricciones:
+        // funcion que elimina de la base de datos y del sistema un tipo
+        // Entrada: la entrada es el nombre de tipo a eliminar
+        // Salida: esta funcion no tiene salidas
+        // Restricciones: el nombre es un string de un tipo de la base de datos
         public static void eliminar_Tipo(string nombre)
         {
             for (int i = 0; i < Lista_tipos.Count; i++)
@@ -283,10 +307,10 @@ namespace SmartHomeTEC_API.API
                                      DashBoard 
          ********************************************************************/
         
-        //
-        // Entrada:
-        // Salida:
-        // Restricciones:
+        // Funcion que genera el promedio de dispositivos por tods los usuarios
+        // Entrada: no tiene entrada
+        // Salida: la salida es un entero con el promedio de dispositivos(redondeado)
+        // Restricciones: no tiene restricciones
         public static int prom_Dispo_usuario()
         {
             int promedio = 0;
@@ -296,18 +320,18 @@ namespace SmartHomeTEC_API.API
             }
             return (promedio/lista_Usuarios.Count);
         }
-        //
-        // Entrada:
-        // Salida:
-        // Restricciones:
+        // funcion que retorna la cantidad de dispositivos en el sistema
+        // Entrada: no tiene entradas
+        // Salida: la salida es un entero con la cantidad de dispostivos
+        // Restricciones: no tiene restricciones
         public static int cantidad_Dispo()
         {
             return (lista_Dispositivos.Count - Administrador.obtener_Disp_Usuarios().Count);
         }
-        //
-        // Entrada:
-        // Salida:
-        // Restricciones:
+        //funcion que obtiene la cantidad de dispositivos por region
+        // Entrada: no tiene entradas
+        // Salida: la funcion no tiene salidas, los datos se guardan en variables globales
+        // Restricciones: no tiene restricciones 
         public static void obtener_Disp_Region()
         {
             for (int i = 0; i < lista_Usuarios.Count; i++)
@@ -324,10 +348,10 @@ namespace SmartHomeTEC_API.API
                 {disp_Oceania++;}
             }
         }
-        //
-        // Entrada:
-        // Salida:
-        // Restricciones:
+        // funcion que obtiene una lista de dispositivoc son los dispositivos asiciados a usuarios
+        // Entrada: notiene entradas
+        // Salida: la salida es una lista de dispositivoc son los dispositivos asiciados a usuarios
+        // Restricciones: no tiene restricciones
         public static IList<Dispositivo> obtener_Disp_Usuarios()
         {
             IList<Dispositivo> lista = new List<Dispositivo>();
@@ -346,10 +370,10 @@ namespace SmartHomeTEC_API.API
             }
             return lista;
         }
-        //
-        // Entrada:
-        // Salida:
-        // Restricciones:
+        // funcion que obtiene una lista de dispositivoc son los dispositivos no asiciados a usuarios
+        // Entrada: notiene entradas
+        // Salida: la salida es una lista de dispositivoc son los dispositivos no asiciados a usuarios
+        // Restricciones: no tiene restricciones
         public static IList<Dispositivo> obtener_Disp_SinUsuarios()
         {
             List<Dispositivo> lista = new List<Dispositivo>();
@@ -383,10 +407,10 @@ namespace SmartHomeTEC_API.API
                               Comprar / Factura
          ********************************************************************/
         
-        //
-        // Entrada:
-        // Salida:
-        // Restricciones:
+        // Funcion que asigna un dispositivo a aun usuario
+        // Entrada: la entrada es un dispositivo de la base de datos
+        // Salida: no tiene salidas
+        // Restricciones: la entrada tiene que ser un dispositiov del sistema no nulo
         public static void comprarDispositivo(Dispositivo disp)
         {
             Console.WriteLine("Se agrega dispositivo a usuaior: " + usuarioActual.nombre);
@@ -394,10 +418,10 @@ namespace SmartHomeTEC_API.API
             conn.InsertarPedidoBaseDatos(disp);
             
         }
-        //
-        // Entrada:
-        // Salida:
-        // Restricciones:
+        // Funcion que envia un correo al usuario que compro un producto con la factura y la garantia
+        // Entrada: al entrada es una fatura generada en la web
+        // Salida: no tiene salidas
+        // Restricciones: la factura no puede se nula
         public static void enviarCorreoFactura(Factura factura)
         {
             var smtpClient = new SmtpClient("smtp.gmail.com")
@@ -425,10 +449,10 @@ namespace SmartHomeTEC_API.API
             smtpClient.Send(mailMessage);
    
         }
-        //
-        // Entrada:
-        // Salida:
-        // Restricciones:
+        // funcion que genera el pdf de la factura
+        // Entrada: la entrada son los datos de la factura a generar
+        // Salida: como saida es un memoryStream con el documento
+        // Restricciones: la factura no puede ser nula
         public static MemoryStream crearPDFFactura(Factura factura)
         {
             
@@ -461,7 +485,10 @@ namespace SmartHomeTEC_API.API
             
             return stream;
         }
-        
+        // funcion que genera el pdf de la garantia
+        // Entrada: la entrada son los datos del dispositivo a generar garantia
+        // Salida: como saida es un memoryStream con el documento
+        // Restricciones: la factura no puede ser nula
         public static MemoryStream crearPDFGarantia(Dispositivo disp)
         {
             PdfDocument document = new PdfDocument();

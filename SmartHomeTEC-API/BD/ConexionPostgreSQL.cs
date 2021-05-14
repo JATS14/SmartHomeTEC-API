@@ -5,25 +5,32 @@ using SmartHomeTEC_API.API;
 
 namespace SmartHomeTEC_API.BD
 {
+    //Esta clase es la encargada de la coneccion con la base de datos de SMARTHOMETEC
+    //posee toda la configuracion para una connecion a la base de datos de forma modular
     public class ConexionPostgreSQL
     {
         private NpgsqlConnection coneccion = new NpgsqlConnection("Server = localhost; User Id = postgres; Password = admin; DataBase = postgres");
         private int numeroPedido = 58469755;
         private int cantPedidos = 0;
+        
+        //Funcion que crea una coneccion con la base de datos
         public void Conectar()
         {
             coneccion.Open();
             Console.WriteLine("Conectado a la Base de Datos en PostgreSQL");   
         }
 
-
+        //Funcion que descionecta el API de la base de datos
         public void Desconetar()
         {
             coneccion.Close();
             Console.WriteLine("Desconectado de la Base de Datos en PostgreSQL"); 
         }
 
-
+        //Funcion en cargada de converir todos los datos que estan en la base de datos
+        //a objetos que se pueden utilizar en el API
+        //Esta funcion carga los datos iniciales de populacion que se encuentran en la base de datos.
+        // Lo hace para la clase tipo, usuario, distribuidor y dispositivo
         public void iniciar_Base_Datos()
         {
             // ------------------------------ Tipo
@@ -112,7 +119,10 @@ namespace SmartHomeTEC_API.BD
             }
         }
 
-
+        //Funcion que inserta un usuario a la base de datos
+        //Entrada: un usuario nuevo para la base de datos
+        //Saliada: esta funcion no tiene salidas
+        //restricciones: el usuario no puede ser nulo
         public void InsertarUsuarioBaseDatos(Usuario usuario)
         {
             IDbCommand command = coneccion.CreateCommand();
@@ -158,7 +168,10 @@ namespace SmartHomeTEC_API.BD
             command.ExecuteNonQuery();
             
         }
-        
+        //Funcion que inserta un dispositivo a la base de datos
+        //Entrada: un dispositivo nuevo para la base de datos
+        //Saliada: esta funcion no tiene salidas
+        //restricciones: el dispositivo no puede ser nulo
         public void InsertarDispositivoBaseDatos(Dispositivo dispositivo)
         {
             IDbCommand command = coneccion.CreateCommand();
@@ -199,7 +212,10 @@ namespace SmartHomeTEC_API.BD
             
             command.ExecuteNonQuery();
         }
-
+        //Funcion que inserta un Tipo a la base de datos
+        //Entrada: un Tipo nuevo para la base de datos
+        //Saliada: esta funcion no tiene salidas
+        //restricciones: el Tipo no puede ser nulo
         public void InsertarTipoBaseDatos(Tipo tipo)
         {
             IDbCommand command = coneccion.CreateCommand();
@@ -225,7 +241,10 @@ namespace SmartHomeTEC_API.BD
             command.ExecuteNonQuery();
 
         }
-
+        //Funcion que inserta un pedido a la base de datos
+        //Entrada: un pedido nuevo para la base de datos
+        //Saliada: esta funcion no tiene salidas
+        //restricciones: el pedido no puede ser nulo
         public void InsertarPedidoBaseDatos(Dispositivo dispositivo)
         {
             IDbCommand command = coneccion.CreateCommand();

@@ -6,6 +6,7 @@ using SmartHomeTEC_API.API;
 
 namespace SmartHomeTEC_API.Controllers
 {
+    //clase con un get que coloca la lista de ususario en un link para ser obtenido en la aplicacion web
     [ApiController]
     [Route("[controller]")]
     public class GetUsuarioActualController : ControllerBase

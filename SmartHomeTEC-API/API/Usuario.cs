@@ -3,6 +3,8 @@ using System.Collections.Generic;
 
 namespace SmartHomeTEC_API.API
 {
+    //Clase que contiene los datos de los Usuarios del sistema
+    //contiene los datos necesarios para proceder con la funcionalidad
     public class Usuario
     {
         //Atributos

@@ -9,10 +9,15 @@ using System.Text.Json.Serialization;
 
 namespace SmartHomeTEC_API.Controllers
 {
+    //Clase encargada de gestionar a los usuario rsgistrados en el sistema, por medio de posts del web
     [ApiController]
     [Route("[controller]")]
     public class UsuarioController : ControllerBase
     {
+        //Funcion que edita a un usuario del sistema
+        //Entrada: un usuario que este resgitrado en el sistema
+        //Salida: una respuesta con el estado
+        //restrucciones: el usuario no puede ser nulo y esta en la base de datos
         [HttpPost]
         [Route("EditarPerfil")]
         [ProducesResponseType(StatusCodes.Status200OK)]
@@ -23,7 +28,10 @@ namespace SmartHomeTEC_API.Controllers
             Administrador.EditarUsuarioActual(usuario);
             return new respuesta("exito");
         }
-
+        //Funcion que recibe los datos de un dispostivo comprado y lo asigna
+        //Entrada: un dispositivo que este resgitrado en el sistema
+        //Salida: una respuesta con el estado
+        //restrucciones: el dispositivo no puede ser nulo y esta en la base de datos
         [HttpPost]
         [Route("ComparDispositivo")]
         [ProducesResponseType(StatusCodes.Status200OK)]
@@ -34,7 +42,10 @@ namespace SmartHomeTEC_API.Controllers
             Administrador.comprarDispositivo(disp);
             return new respuesta("exito");
         }
-        
+        //Funcion que recibe los datos de una factura
+        //Entrada: una factura 
+        //Salida: una respuesta con el estado
+        //restrucciones: la factura no puede ser nulo y esta en la base de datos        
         [HttpPost]
         [Route("DatosDactura")]
         [ProducesResponseType(StatusCodes.Status200OK)]

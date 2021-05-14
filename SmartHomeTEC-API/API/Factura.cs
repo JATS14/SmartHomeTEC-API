@@ -1,5 +1,7 @@
 namespace SmartHomeTEC_API.API
 {
+    //Clase que contiene los datos de las facturas del sistema
+    //contiene los datos necesarios para proceder con la funcionalidad de compra y generar correos con PDFs
     public class Factura
     {
         public string numeroTarjeta;
@@ -10,6 +12,7 @@ namespace SmartHomeTEC_API.API
         public int codigoPostal;
         public int celular;
 
+        //Contructor
         public Factura(string numeroTarjeta, int codigoSeguridad, string nombre, string apellido, string direccionfacturacion, int codigoPostal, int celular)
         {
             this.numeroTarjeta = numeroTarjeta;
@@ -21,6 +24,7 @@ namespace SmartHomeTEC_API.API
             this.celular = celular;
         }
 
+        //getters y setters
         public string NumeroTarjeta
         {
             get => numeroTarjeta;

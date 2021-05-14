@@ -15,7 +15,7 @@ namespace SmartHomeTEC_API.Controllers
     [Route("[controller]")]
     public class DispositivosController : ControllerBase
     {
-
+        //Esta funcion es la encargada de hacer post para agregar dispositivo
         [HttpPost]
         [Route("agregarDispositivo")]
         [ProducesResponseType(StatusCodes.Status200OK)]
@@ -32,7 +32,7 @@ namespace SmartHomeTEC_API.Controllers
             Administrador.adregar_Dispositivo(newdispo);
             return new respuesta("agregado"); 
         }
-        
+        //Esta funcion es la encargada de hacer post para editar dispositivo
         [HttpPost]
         [Route("editarDispositivo")]
         [ProducesResponseType(StatusCodes.Status200OK)]
@@ -64,6 +64,8 @@ namespace SmartHomeTEC_API.Controllers
             
             return new respuesta("exito");
         }
+        
+        //Esta funcion es la encargada de hacer post para eliminar dispositivo
         [HttpPost]
         [Route("eliminarDispositivo")]
         [ProducesResponseType(StatusCodes.Status200OK)]
@@ -75,6 +77,7 @@ namespace SmartHomeTEC_API.Controllers
             return new respuesta("exito");
         }
         
+        //Esta funcion es la encargada de hacer post para buscar dispositivo
         [HttpPost]
         [Route("buscarDispositivo")]
         [ProducesResponseType(StatusCodes.Status200OK)]
@@ -87,7 +90,7 @@ namespace SmartHomeTEC_API.Controllers
 
         
         
-        
+        //Clase con datos recibidos de un buscar en la aplicacion web
         public class editar
         {
             public string queEditar;
@@ -119,7 +122,8 @@ namespace SmartHomeTEC_API.Controllers
                 set => editarS = value;
             }
         }
-
+        
+        //Clase con datos recibidos de un dispositiov sin tipo en la aplicacion web
         public class dispositivoEntrada
         {
             public string nombre;
@@ -178,6 +182,7 @@ namespace SmartHomeTEC_API.Controllers
             
         }
         
+        //Clase con datos recibidos de un buscar en la aplicacion web
         public class dispositivoEntradaEditado
         {
             public string nombreEditar;

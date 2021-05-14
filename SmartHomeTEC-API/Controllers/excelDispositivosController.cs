@@ -13,6 +13,7 @@ using Range = Microsoft.Office.Interop.Excel.Range;
 
 namespace SmartHomeTEC_API.Controllers
 {
+    //Clase que recibe un archivo excel desde un post en la palicacion WEB
     [ApiController]
     [Route("[controller]")]
     public class excelDispositivosController : ControllerBase

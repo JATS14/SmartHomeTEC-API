@@ -6,6 +6,8 @@ using Microsoft.AspNetCore.Http;
 
 namespace SmartHomeTEC_API.Controllers
 {
+    //clase con un get que coloca la lista de Tipos en un link para ser obtenido en la aplicacion web
+
     [ApiController]
     [Route("[controller]")]
     public class tipoController : ControllerBase

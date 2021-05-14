@@ -6,6 +6,7 @@ using SmartHomeTEC_API.API;
 
 namespace SmartHomeTEC_API.Controllers
 {
+    //Clase que hace un get con los datos de todos los distibuidores
     [ApiController]
     [Route("[controller]")]
     public class DistribuidoresController : ControllerBase

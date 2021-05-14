@@ -5,6 +5,8 @@ using SmartHomeTEC_API.API;
 
 namespace SmartHomeTEC_API.Controllers
 {
+    //Clse necesaria para enviar en un get todos los datos necesarios para formar el dashboard en la web
+    
     [ApiController]
     [Route("[controller]")]
     public class DashBoardController : ControllerBase
@@ -15,6 +17,8 @@ namespace SmartHomeTEC_API.Controllers
         {
             _logger = logger;
         }
+        
+        //Esta funcion es la encargada de hacer get a los datos necesarios para formar grafica
         [HttpGet]
         [Route("DatosDeGraficas")]
         public enviarDatosDashBoard ObtenerDatosDashBoard()
@@ -29,6 +33,7 @@ namespace SmartHomeTEC_API.Controllers
 
         }
         
+        //Esta funcion es la encargada de hacer get a la lista de dispositiovs con usuario asignado
         [HttpGet]
         [Route("ListaDispositivosUsuario")]
         public IList<Dispositivo> ObtenerListaDispositivosUsuario()
@@ -36,6 +41,7 @@ namespace SmartHomeTEC_API.Controllers
             return Administrador.obtener_Disp_Usuarios();
         }
         
+        //Esta funcion es la encargada de hacer get a la lista de dispositiovs sin usuario asignado
         [HttpGet]
         [Route("ListaDispositivosSinUsuario")]
         public IList<Dispositivo> ObtenerListaDispositivosSinUsuario()
@@ -43,20 +49,23 @@ namespace SmartHomeTEC_API.Controllers
             return Administrador.obtener_Disp_SinUsuarios();
         }
         
+        //Esta funcion es la encargada de hacer get a los datos para formar los reportes de la vista usuario 
         [HttpGet]
         [Route("ReportesUsuario")]
         public enviarDatosUsuario ObtenerReportesUsuarioActual()
         {
             return new enviarDatosUsuario(1200,15,22,"Computadoras");
         }
-
+        
+        
+        //Esta clase asigna los valores necesarios para generar los reportes de la vista usuario
         public class enviarDatosUsuario
         {
             public int consumoMensual;
             public int inicioHoraMasUso;
             public int finalHoraMasUso;
             public string TipoDeMayorUso;
-
+            //Contructor
             public enviarDatosUsuario(int consumoMensual, int inicioHoraMasUso, int finalHoraMasUso, string tipoDeMayorUso)
             {
                 this.consumoMensual = consumoMensual;
@@ -64,7 +73,7 @@ namespace SmartHomeTEC_API.Controllers
                 this.finalHoraMasUso = finalHoraMasUso;
                 TipoDeMayorUso = tipoDeMayorUso;
             }
-
+            //getters y setters
             public int ConsumoMensual
             {
                 get => consumoMensual;
@@ -92,7 +101,7 @@ namespace SmartHomeTEC_API.Controllers
         
         
 
-
+        //Esta clase asigna los valores necesarios para formar una grafica en la web
         public class enviarDatosDashBoard
         {
             public int totalDispocitivos;
@@ -104,6 +113,7 @@ namespace SmartHomeTEC_API.Controllers
             public int dispAfrica;
             public int dispOceania;
             
+            //Contructor
             public enviarDatosDashBoard(int totalDispocitivos, int promDispUsuario,int cantDispAsociados,
                                         int dispAmerica, int dispEuropa, int dispAsia,
                                         int dispAfrica, int dispOceania)
@@ -117,7 +127,7 @@ namespace SmartHomeTEC_API.Controllers
                 this.dispAfrica = dispAfrica;
                 this.dispOceania = dispOceania;
             }
-
+            //getters y setters
             public int TotalDispocitivos
             {
                 get => totalDispocitivos;

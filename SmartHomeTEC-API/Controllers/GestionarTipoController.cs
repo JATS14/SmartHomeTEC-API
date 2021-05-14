@@ -10,10 +10,13 @@ using System.Text.Json.Serialization;
 
 namespace SmartHomeTEC_API.Controllers
 {
+    //clase con los post necesarios para poder insertar, eliminar, buscar y editar tipos del sistema
     [ApiController]
     [Route("[controller]")]
     public class GestionarTipoController : ControllerBase
     {
+        
+        //Esta funcion es la encargada de hacer post para agregar tipo
         [HttpPost]
         [Route("agregarTipo")]
         [ProducesResponseType(StatusCodes.Status200OK)]
@@ -25,7 +28,8 @@ namespace SmartHomeTEC_API.Controllers
             Administrador.insertar_Tipo(tipo);
             return new respuesta("agregado"); 
         }
-
+        
+        //Esta funcion es la encargada de hacer post para editar tipo
         [HttpPost]
         [Route("editarTipo")]
         [ProducesResponseType(StatusCodes.Status200OK)]
@@ -34,7 +38,7 @@ namespace SmartHomeTEC_API.Controllers
             Administrador.editar_Tipo(edicion);
             return new respuesta("exito");
         }
-        
+        //Esta funcion es la encargada de hacer post para eliminar tipo       
         [HttpPost]
         [Route("eliminarTipo")]
         [ProducesResponseType(StatusCodes.Status200OK)]
@@ -44,6 +48,7 @@ namespace SmartHomeTEC_API.Controllers
             return new respuesta("exito");
         }
         
+        //Esta funcion es la encargada de hacer post para buscar tipo
         [HttpPost]
         [Route("buscarTipo")]
         [ProducesResponseType(StatusCodes.Status200OK)]
@@ -53,7 +58,7 @@ namespace SmartHomeTEC_API.Controllers
         }
         
 
-        
+        //Clase plantilla de datos de entrada desde la apliaccion web
         public class BusquedaEntrada
         {
             public string busquedaEnt;

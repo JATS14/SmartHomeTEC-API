@@ -1,5 +1,7 @@
 namespace SmartHomeTEC_API.API
 {
+    //Clase que contiene los datos de los dispositivos del sistema
+    //contiene los datos necesarios para proceder con la funcionalidad
     public class Dispositivo
     {
         public string nombre;
@@ -9,6 +11,7 @@ namespace SmartHomeTEC_API.API
         public string marca;
         public int consumo_Electrico;
 
+        //Contructor
         public Dispositivo(string nombre, int precio, Tipo tipo, int numeroSerie, string marca, int consumoElectrico)
         {
             this.nombre = nombre;
@@ -18,7 +21,7 @@ namespace SmartHomeTEC_API.API
             this.marca = marca;
             consumo_Electrico = consumoElectrico;
         }
-
+        //Getters y setters
         public string Nombre
         {
             get => nombre;

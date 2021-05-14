@@ -10,6 +10,7 @@ using System.Text.Json.Serialization;
 
 namespace SmartHomeTEC_API.Controllers
 {
+    //Clase encargada de controlar los usuarios que estan en el sistema en este momento
     [ApiController]
     [Route("[controller]")]
     public class PostUsuarioActualController : ControllerBase
@@ -24,7 +25,7 @@ namespace SmartHomeTEC_API.Controllers
             return new respuesta("Cambiado"); 
         }
         
-        
+        //Plantilla de suario simplificado para mejor manejo
         public class LoginUsuarioActual
         {
             public string correo;
