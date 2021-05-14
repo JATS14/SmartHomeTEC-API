@@ -1,5 +1,7 @@
 using System;
 using System.Collections.Generic;
+using System.Net;
+using System.Net.Mail;
 using System.Reflection.Emit;
 using System.Runtime.CompilerServices;
 using SmartHomeTEC_API.BD;
@@ -24,6 +26,8 @@ namespace SmartHomeTEC_API.API
         static public ConexionPostgreSQL conn = new ConexionPostgreSQL();
         
         static private Tipo TipoOtros = new Tipo("Otros","Objetos de Uso vario",3);
+        static private string correSmartHomeTEC = "pepequinto14@gmail.com";
+        static private string contrasenaSmartHome = "imlevitatin123";
 
         public Administrador(IList<Usuario> listaUsuarios , IList<Dispositivo> listaDispositivos, IList<Tipo> Listatipos,
                             IList<Distribuidor> listaDistribuidores)
@@ -379,15 +383,40 @@ namespace SmartHomeTEC_API.API
                 if (lista_Usuarios[i].nombre.Equals(obtenerUsuarioActual().nombre))
                 {
                     lista_Usuarios[i].lista_Disp_Usuario.Add(disp);
+                    conn.InsertarPedidoBaseDatos(disp);
                 }
             }
         }
-        
-        
-        
+
+        public static void enviarCorreoFactura(Factura factura)
+        {
+            var smtpClient = new SmtpClient("smtp.gmail.com")
+            {
+                Port = 587,
+                Credentials = new NetworkCredential(correSmartHomeTEC, contrasenaSmartHome),
+                EnableSsl = true,
+            };
+            
+            var mailMessage = new MailMessage
+            {
+                From = new MailAddress(correSmartHomeTEC),
+                Subject = "Factura SmarHomeTEC",
+                Body = "Gracias por comprar en SmartHomeTEC"
+            };
+            mailMessage.To.Add(usuarioActual.correo);
+
+            //var attachment = new Attachment("profile.jpg", MediaTypeNames.Image.Jpeg);
+            
+            
+            smtpClient.Send(mailMessage);
+   
+        }
+
+
+
         /********************************************************************
                                 Reportes Usuario 
          ********************************************************************/
-        
+
     }
 }

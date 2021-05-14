@@ -8,8 +8,8 @@ namespace SmartHomeTEC_API.BD
     public class ConexionPostgreSQL
     {
         private NpgsqlConnection coneccion = new NpgsqlConnection("Server = localhost; User Id = postgres; Password = admin; DataBase = postgres");
-
-
+        private int numeroPedido = 58469755;
+        private int cantPedidos = 0;
         public void Conectar()
         {
             coneccion.Open();
@@ -226,5 +226,53 @@ namespace SmartHomeTEC_API.BD
 
         }
 
+        public void InsertarPedidoBaseDatos(Dispositivo dispositivo)
+        {
+            IDbCommand command = coneccion.CreateCommand();
+            string queryInsertarDispositivo = "INSERT INTO PEDIDO ( NumeroPedido , Fecha, Hora, NombreTipo, Marca, NumeroSerie, Precio) VALUES( @NumeroPedidoF, @FechaF, @HoraF, @NombreTipoF, @MarcaF, @NumeroSerieF, @PrecioF);";
+
+            command.CommandText = queryInsertarDispositivo;
+            
+            
+            
+            cantPedidos++;
+            var parameter = command.CreateParameter();
+            parameter.ParameterName = "NumeroPedidoF";
+            parameter.Value = (numeroPedido+10*cantPedidos);
+            command.Parameters.Add(parameter);
+
+            parameter = command.CreateParameter();
+            parameter.ParameterName = "FechaF";
+            parameter.Value = DateTime.Now.ToString("yyyy-MM-dd");
+            command.Parameters.Add(parameter);
+            
+            parameter = command.CreateParameter();
+            parameter.ParameterName = "HoraF";
+            parameter.Value = DateTime.Now.ToString("hh:mm:ss");
+            command.Parameters.Add(parameter);
+            
+            parameter = command.CreateParameter();
+            parameter.ParameterName = "NombreTipoF";
+            parameter.Value = dispositivo.tipo.nombre;
+            command.Parameters.Add(parameter);
+            
+            parameter = command.CreateParameter();
+            parameter.ParameterName = "MarcaF";
+            parameter.Value = dispositivo.marca;
+            command.Parameters.Add(parameter);
+            
+            parameter = command.CreateParameter();
+            parameter.ParameterName = "NumeroSerieF";
+            parameter.Value = dispositivo.numero_Serie;
+            command.Parameters.Add(parameter);
+            
+            parameter = command.CreateParameter();
+            parameter.ParameterName = "PrecioF";
+            parameter.Value = dispositivo.precio;
+            command.Parameters.Add(parameter);
+            
+            command.ExecuteNonQuery();
+        }
+        
     }
 }

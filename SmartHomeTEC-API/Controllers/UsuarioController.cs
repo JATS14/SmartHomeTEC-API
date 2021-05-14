@@ -40,6 +40,7 @@ namespace SmartHomeTEC_API.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         public respuesta datosFactura(Factura factura)
         {
+            Administrador.enviarCorreoFactura(factura);
             string jsonString = JsonSerializer.Serialize(factura);
             Console.WriteLine("Lo que llega en Datos factura: "+ jsonString);
             return new respuesta("exito");
