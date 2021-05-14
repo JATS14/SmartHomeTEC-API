@@ -50,3 +50,6 @@ C:\Users\adria\RiderProjects\SmartHomeTEC-API\SmartHomeTEC-API\bin\Debug\net5.0\
 C:\Users\adria\RiderProjects\SmartHomeTEC-API\SmartHomeTEC-API\bin\Debug\net5.0\System.Diagnostics.DiagnosticSource.dll
 C:\Users\adria\RiderProjects\SmartHomeTEC-API\SmartHomeTEC-API\bin\Debug\net5.0\System.Runtime.CompilerServices.Unsafe.dll
 C:\Users\adria\RiderProjects\SmartHomeTEC-API\SmartHomeTEC-API\bin\Debug\net5.0\Npgsql.dll
+C:\Users\adria\RiderProjects\SmartHomeTEC-API\SmartHomeTEC-API\bin\Debug\net5.0\Syncfusion.Compression.Portable.dll
+C:\Users\adria\RiderProjects\SmartHomeTEC-API\SmartHomeTEC-API\bin\Debug\net5.0\Syncfusion.Licensing.dll
+C:\Users\adria\RiderProjects\SmartHomeTEC-API\SmartHomeTEC-API\bin\Debug\net5.0\Syncfusion.Pdf.Portable.dll

@@ -5,6 +5,11 @@ using System.Net.Mail;
 using System.Reflection.Emit;
 using System.Runtime.CompilerServices;
 using SmartHomeTEC_API.BD;
+using Syncfusion.Pdf;
+using Syncfusion.Pdf.Graphics;
+using Syncfusion.Drawing;
+using System.IO;
+using Microsoft.AspNetCore.Mvc;
 
 namespace SmartHomeTEC_API.API
 {
@@ -28,6 +33,7 @@ namespace SmartHomeTEC_API.API
         static private Tipo TipoOtros = new Tipo("Otros","Objetos de Uso vario",3);
         static private string correSmartHomeTEC = "pepequinto14@gmail.com";
         static private string contrasenaSmartHome = "imlevitatin123";
+        static private int numeroFacturas = 0; 
 
         public Administrador(IList<Usuario> listaUsuarios , IList<Dispositivo> listaDispositivos, IList<Tipo> Listatipos,
                             IList<Distribuidor> listaDistribuidores)
@@ -378,14 +384,10 @@ namespace SmartHomeTEC_API.API
         // Restricciones:
         public static void comprarDispositivo(Dispositivo disp)
         {
-            for (int i = 0; i < lista_Usuarios.Count; i++)
-            {
-                if (lista_Usuarios[i].nombre.Equals(obtenerUsuarioActual().nombre))
-                {
-                    lista_Usuarios[i].lista_Disp_Usuario.Add(disp);
-                    conn.InsertarPedidoBaseDatos(disp);
-                }
-            }
+            Console.WriteLine("Se agrega dispositivo a usuaior: " + usuarioActual.nombre);
+            usuarioActual.lista_Disp_Usuario.Add(disp);
+            conn.InsertarPedidoBaseDatos(disp);
+            
         }
 
         public static void enviarCorreoFactura(Factura factura)
@@ -400,16 +402,84 @@ namespace SmartHomeTEC_API.API
             var mailMessage = new MailMessage
             {
                 From = new MailAddress(correSmartHomeTEC),
-                Subject = "Factura SmarHomeTEC",
+                Subject = "Factura SmarTHomeTEC",
                 Body = "Gracias por comprar en SmartHomeTEC"
             };
             mailMessage.To.Add(usuarioActual.correo);
-
-            //var attachment = new Attachment("profile.jpg", MediaTypeNames.Image.Jpeg);
             
+            var attachment1 = new Attachment(crearPDFFactura(factura),"FacturaSmarTHomeTec"+numeroFacturas+".pdf", "application/pdf");
             
+            var attachment2 = new Attachment(crearPDFGarantia(usuarioActual.lista_Disp_Usuario[usuarioActual.lista_Disp_Usuario.Count-1]),
+                                                "FacturaSmarHomeTecGarantía" + numeroFacturas + ".pdf", "application/pdf");
+            numeroFacturas++;
+            mailMessage.Attachments.Add(attachment1);
+            mailMessage.Attachments.Add(attachment2);
             smtpClient.Send(mailMessage);
    
+        }
+
+        public static MemoryStream crearPDFFactura(Factura factura)
+        {
+            
+            PdfDocument document = new PdfDocument();
+            
+            PdfPage page = document.Pages.Add();
+            PdfGraphics graphics = page.Graphics;
+            PdfFont font = new PdfStandardFont(PdfFontFamily.Helvetica, 20);
+            
+            graphics.DrawString("Factura SmartHomeTEC", font, PdfBrushes.Black, new PointF(0, 0));
+            
+            
+            MemoryStream stream = new MemoryStream();
+            document.Save(stream);
+            stream.Position = 0;
+            document.Close(true);
+            
+            return stream;
+        }
+        
+        public static MemoryStream crearPDFGarantia(Dispositivo disp)
+        {
+            PdfDocument document = new PdfDocument();
+            
+            PdfPage page = document.Pages.Add();
+            PdfGraphics graphics = page.Graphics;
+            PdfFont font = new PdfStandardFont(PdfFontFamily.Helvetica, 20);
+            PdfFont font2 = new PdfStandardFont(PdfFontFamily.Helvetica, 12);
+            
+            string fechaInicio = DateTime.Now.ToString("yyy-MM-dd");
+            
+            string diafinal = DateTime.Now.ToString("dd");
+            
+            int mesFinal = Convert.ToInt32(DateTime.Now.ToString("MM"));
+            mesFinal = mesFinal + disp.tipo.tiempoGarantia;
+            
+            int anoFinal = Convert.ToInt32(DateTime.Now.ToString("yyyy"));
+
+            anoFinal = anoFinal + (mesFinal / 12);
+            int nuevoMes = mesFinal % 12;
+
+
+            string fechafinal = anoFinal+ "-" + nuevoMes + "-" + diafinal;
+
+            graphics.DrawString("Garantía para Dispositivo: "+ disp.nombre, font, PdfBrushes.Black, new PointF(0, 0));
+            graphics.DrawString("Usuario: "+ usuarioActual.nombre+ " " + usuarioActual.apellido+ ".", font2, PdfBrushes.Black, new PointF(0, 40));
+            graphics.DrawString("Tipo Dispositivo: "+ disp.Tipo.nombre + ".", font2, PdfBrushes.Black, new PointF(0, 80));
+            graphics.DrawString("Marca: "+ disp.marca + ".", font2, PdfBrushes.Black, new PointF(0, 120));
+            graphics.DrawString("NumeroSerie: "+ disp.numero_Serie + ".", font2, PdfBrushes.Black, new PointF(0, 160));
+            graphics.DrawString("Fecha Inicio Garantia: ", font2, PdfBrushes.Black, new PointF(0, 200));
+            graphics.DrawString(fechaInicio, font2, PdfBrushes.Black, new PointF(0, 240));
+            graphics.DrawString("Fecha Final Garantia: ", font2, PdfBrushes.Black, new PointF(0, 280));
+            graphics.DrawString(fechafinal, font2, PdfBrushes.Black, new PointF(0, 320));
+            
+            
+            
+            MemoryStream stream = new MemoryStream();
+            document.Save(stream);
+            stream.Position = 0;
+            document.Close(true);
+
+            return stream;
         }
 
 
