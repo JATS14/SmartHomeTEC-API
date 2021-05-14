@@ -1,9 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "1N+zbL2kU7D8761KtiUBS5LHT4YEtFMWfFLdzMAXuJBL42pCw0ULeHB+ZNza+AYZQGwAV5S0wC2LLWBsoQGpfA==",
+  "dgSpecHash": "lymUtilK7kBkfYHZMbWAx9Rtz7jWB7FGWgTeD8Ujati3n/rdBzWzJQJC4yPP7Z6+TVRf10rOO+4bCDK+LJ6REA==",
   "success": true,
   "projectFilePath": "C:\\Users\\adria\\RiderProjects\\SmartHomeTEC-API\\SmartHomeTEC-API\\SmartHomeTEC-API.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\adria\\.nuget\\packages\\exceldatareader\\3.6.0\\exceldatareader.3.6.0.nupkg.sha512",
     "C:\\Users\\adria\\.nuget\\packages\\microsoft.aspnet.webapi\\5.2.7\\microsoft.aspnet.webapi.5.2.7.nupkg.sha512",
     "C:\\Users\\adria\\.nuget\\packages\\microsoft.aspnet.webapi.client\\5.2.7\\microsoft.aspnet.webapi.client.5.2.7.nupkg.sha512",
     "C:\\Users\\adria\\.nuget\\packages\\microsoft.aspnet.webapi.core\\5.2.7\\microsoft.aspnet.webapi.core.5.2.7.nupkg.sha512",
@@ -25,8 +26,9 @@
     "C:\\Users\\adria\\.nuget\\packages\\microsoft.extensions.options\\6.0.0-preview.3.21201.4\\microsoft.extensions.options.6.0.0-preview.3.21201.4.nupkg.sha512",
     "C:\\Users\\adria\\.nuget\\packages\\microsoft.extensions.primitives\\6.0.0-preview.3.21201.4\\microsoft.extensions.primitives.6.0.0-preview.3.21201.4.nupkg.sha512",
     "C:\\Users\\adria\\.nuget\\packages\\microsoft.net.http\\2.2.29\\microsoft.net.http.2.2.29.nupkg.sha512",
-    "C:\\Users\\adria\\.nuget\\packages\\microsoft.netcore.platforms\\2.0.0\\microsoft.netcore.platforms.2.0.0.nupkg.sha512",
+    "C:\\Users\\adria\\.nuget\\packages\\microsoft.netcore.platforms\\6.0.0-preview.3.21201.4\\microsoft.netcore.platforms.6.0.0-preview.3.21201.4.nupkg.sha512",
     "C:\\Users\\adria\\.nuget\\packages\\microsoft.netcore.targets\\1.1.0\\microsoft.netcore.targets.1.1.0.nupkg.sha512",
+    "C:\\Users\\adria\\.nuget\\packages\\microsoft.office.interop.excel\\15.0.4795.1000\\microsoft.office.interop.excel.15.0.4795.1000.nupkg.sha512",
     "C:\\Users\\adria\\.nuget\\packages\\microsoft.openapi\\1.2.3\\microsoft.openapi.1.2.3.nupkg.sha512",
     "C:\\Users\\adria\\.nuget\\packages\\netstandard.library\\2.0.0\\netstandard.library.2.0.0.nupkg.sha512",
     "C:\\Users\\adria\\.nuget\\packages\\newtonsoft.json\\10.0.1\\newtonsoft.json.10.0.1.nupkg.sha512",
@@ -76,7 +78,7 @@
     "C:\\Users\\adria\\.nuget\\packages\\system.runtime.serialization.formatters\\4.3.0\\system.runtime.serialization.formatters.4.3.0.nupkg.sha512",
     "C:\\Users\\adria\\.nuget\\packages\\system.runtime.serialization.primitives\\4.3.0\\system.runtime.serialization.primitives.4.3.0.nupkg.sha512",
     "C:\\Users\\adria\\.nuget\\packages\\system.text.encoding\\4.3.0\\system.text.encoding.4.3.0.nupkg.sha512",
-    "C:\\Users\\adria\\.nuget\\packages\\system.text.encoding.codepages\\4.4.0\\system.text.encoding.codepages.4.4.0.nupkg.sha512",
+    "C:\\Users\\adria\\.nuget\\packages\\system.text.encoding.codepages\\6.0.0-preview.3.21201.4\\system.text.encoding.codepages.6.0.0-preview.3.21201.4.nupkg.sha512",
     "C:\\Users\\adria\\.nuget\\packages\\system.text.encoding.extensions\\4.3.0\\system.text.encoding.extensions.4.3.0.nupkg.sha512",
     "C:\\Users\\adria\\.nuget\\packages\\system.text.regularexpressions\\4.3.0\\system.text.regularexpressions.4.3.0.nupkg.sha512",
     "C:\\Users\\adria\\.nuget\\packages\\system.threading\\4.3.0\\system.threading.4.3.0.nupkg.sha512",
@@ -123,6 +125,16 @@
       "warningLevel": 1,
       "message": "Package 'Microsoft.Net.Http 2.2.29' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8' instead of the project target framework 'net5.0'. This package may not be fully compatible with your project.",
       "libraryId": "Microsoft.Net.Http",
+      "targetGraphs": [
+        "net5.0"
+      ]
+    },
+    {
+      "code": "NU1701",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Package 'Microsoft.Office.Interop.Excel 15.0.4795.1000' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8' instead of the project target framework 'net5.0'. This package may not be fully compatible with your project.",
+      "libraryId": "Microsoft.Office.Interop.Excel",
       "targetGraphs": [
         "net5.0"
       ]

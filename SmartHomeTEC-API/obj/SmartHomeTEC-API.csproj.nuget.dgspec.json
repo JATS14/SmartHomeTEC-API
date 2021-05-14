@@ -38,6 +38,10 @@
         "net5.0": {
           "targetAlias": "net5.0",
           "dependencies": {
+            "ExcelDataReader": {
+              "target": "Package",
+              "version": "[3.6.0, )"
+            },
             "Microsoft.AspNet.WebApi": {
               "target": "Package",
               "version": "[5.2.7, )"
@@ -54,6 +58,10 @@
               "target": "Package",
               "version": "[2.2.29, )"
             },
+            "Microsoft.Office.Interop.Excel": {
+              "target": "Package",
+              "version": "[15.0.4795.1000, )"
+            },
             "Npgsql": {
               "target": "Package",
               "version": "[6.0.0-preview3, )"
@@ -65,6 +73,10 @@
             "Syncfusion.Pdf.Net.Core": {
               "target": "Package",
               "version": "[19.1.0.63, )"
+            },
+            "System.Text.Encoding.CodePages": {
+              "target": "Package",
+              "version": "[6.0.0-preview.3.21201.4, )"
             }
           },
           "imports": [

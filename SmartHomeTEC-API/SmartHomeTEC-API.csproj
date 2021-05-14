@@ -6,13 +6,16 @@
     </PropertyGroup>
 
     <ItemGroup>
+        <PackageReference Include="ExcelDataReader" Version="3.6.0" />
         <PackageReference Include="Microsoft.AspNet.WebApi" Version="5.2.7" />
         <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.0-preview.3.21201.2" />
         <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="6.0.0-preview.3.21201.2" />
         <PackageReference Include="Microsoft.Net.Http" Version="2.2.29" />
+        <PackageReference Include="Microsoft.Office.Interop.Excel" Version="15.0.4795.1000" />
         <PackageReference Include="Npgsql" Version="6.0.0-preview3" />
         <PackageReference Include="Swashbuckle.AspNetCore" Version="5.6.3" />
         <PackageReference Include="Syncfusion.Pdf.Net.Core" Version="19.1.0.63" />
+        <PackageReference Include="System.Text.Encoding.CodePages" Version="6.0.0-preview.3.21201.4" />
     </ItemGroup>
 
 </Project>

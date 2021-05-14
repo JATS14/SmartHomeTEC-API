@@ -10,7 +10,7 @@ using Syncfusion.Pdf.Graphics;
 using Syncfusion.Drawing;
 using System.IO;
 using Microsoft.AspNetCore.Mvc;
-
+//
 namespace SmartHomeTEC_API.API
 {
     public class Administrador
@@ -352,25 +352,30 @@ namespace SmartHomeTEC_API.API
         // Restricciones:
         public static IList<Dispositivo> obtener_Disp_SinUsuarios()
         {
-            IList<Dispositivo> lista = new List<Dispositivo>();
+            List<Dispositivo> lista = new List<Dispositivo>();
             for (int i = 0; i < lista_Dispositivos.Count; i++)
             {
                 lista.Add(lista_Dispositivos[i]);
             }
-            
-            for (int i = 0; i < lista_Usuarios.Count; i++)
+            IList<Dispositivo> yaComprados = obtener_Disp_Usuarios();
+
+            if (yaComprados.Count == 0)
             {
-                for (int j = 0; j < lista_Usuarios[i].lista_Disp_Usuario.Count; j++)
+                return lista_Dispositivos;
+            }
+            
+            for (int i = 0; i < lista.Count; i++)
+            {
+                for (int j = 0; j < yaComprados.Count; j++)
                 {
-                    for (int k = 0; k < lista_Dispositivos.Count; k++)
+                    if (yaComprados[j].nombre.Equals(lista[i].nombre))
                     {
-                        if (lista_Usuarios[i].lista_Disp_Usuario[j].nombre.Equals(lista_Dispositivos[k].nombre))
-                        {
-                            lista.RemoveAt(k);
-                        }
+                        lista.Remove(lista[i]);
+                        break;
                     }
                 }
             }
+
             return lista;
         }
         

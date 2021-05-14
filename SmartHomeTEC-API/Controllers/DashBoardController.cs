@@ -25,7 +25,7 @@ namespace SmartHomeTEC_API.Controllers
                                             Administrador.disp_Europa, Administrador.disp_Asia,
                                             Administrador.disp_Africa, Administrador.disp_Oceania);
             */
-            return new enviarDatosDashBoard(100, 5, 60, 10, 11, 12, 13, 14);
+            return new enviarDatosDashBoard(100, 15, 60, 10, 11, 12, 13, 14);
 
         }
         
