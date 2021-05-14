@@ -389,7 +389,10 @@ namespace SmartHomeTEC_API.API
             conn.InsertarPedidoBaseDatos(disp);
             
         }
-
+        //
+        // Entrada:
+        // Salida:
+        // Restricciones:
         public static void enviarCorreoFactura(Factura factura)
         {
             var smtpClient = new SmtpClient("smtp.gmail.com")
@@ -417,7 +420,10 @@ namespace SmartHomeTEC_API.API
             smtpClient.Send(mailMessage);
    
         }
-
+        //
+        // Entrada:
+        // Salida:
+        // Restricciones:
         public static MemoryStream crearPDFFactura(Factura factura)
         {
             
@@ -426,9 +432,22 @@ namespace SmartHomeTEC_API.API
             PdfPage page = document.Pages.Add();
             PdfGraphics graphics = page.Graphics;
             PdfFont font = new PdfStandardFont(PdfFontFamily.Helvetica, 20);
+            PdfFont font2 = new PdfStandardFont(PdfFontFamily.Helvetica, 12);
+            
+            string FechaCompra = DateTime.Now.ToString("yyy-MM-dd");
+            Dispositivo disp = usuarioActual.lista_Disp_Usuario[usuarioActual.lista_Disp_Usuario.Count - 1];
             
             graphics.DrawString("Factura SmartHomeTEC", font, PdfBrushes.Black, new PointF(0, 0));
+            graphics.DrawString("Numero de Factura: 1254875966541231485"+ numeroFacturas, font2, PdfBrushes.Black, new PointF(0, 40));
+            graphics.DrawString("Fecha de compra: "+ FechaCompra , font2, PdfBrushes.Black, new PointF(0, 80));
+            graphics.DrawString("Tipo Dispositivo: "+ disp.tipo.nombre + ".", font2, PdfBrushes.Black, new PointF(0, 120));
+            graphics.DrawString("Precio: "+ disp.precio + " Colones.", font2, PdfBrushes.Black, new PointF(0, 160));
             
+            graphics.DrawString("Datos Factura: ", font2, PdfBrushes.Black, new PointF(0, 200));
+            graphics.DrawString("        Nombre: "+ factura.nombre + " " + factura.apellido + ".", font2, PdfBrushes.Black, new PointF(0, 240));
+            graphics.DrawString("        Direccion: " + factura.direccionfacturacion + ".", font2, PdfBrushes.Black, new PointF(0, 280));
+            graphics.DrawString("        Codigo Postal: " + factura.codigoPostal, font2, PdfBrushes.Black, new PointF(0, 320));
+            graphics.DrawString("        Celular: " + factura.celular, font2, PdfBrushes.Black, new PointF(0, 360));
             
             MemoryStream stream = new MemoryStream();
             document.Save(stream);
@@ -468,9 +487,9 @@ namespace SmartHomeTEC_API.API
             graphics.DrawString("Marca: "+ disp.marca + ".", font2, PdfBrushes.Black, new PointF(0, 120));
             graphics.DrawString("NumeroSerie: "+ disp.numero_Serie + ".", font2, PdfBrushes.Black, new PointF(0, 160));
             graphics.DrawString("Fecha Inicio Garantia: ", font2, PdfBrushes.Black, new PointF(0, 200));
-            graphics.DrawString(fechaInicio, font2, PdfBrushes.Black, new PointF(0, 240));
+            graphics.DrawString("      " + fechaInicio, font2, PdfBrushes.Black, new PointF(0, 240));
             graphics.DrawString("Fecha Final Garantia: ", font2, PdfBrushes.Black, new PointF(0, 280));
-            graphics.DrawString(fechafinal, font2, PdfBrushes.Black, new PointF(0, 320));
+            graphics.DrawString("      " + fechafinal, font2, PdfBrushes.Black, new PointF(0, 320));
             
             
             
@@ -481,12 +500,6 @@ namespace SmartHomeTEC_API.API
 
             return stream;
         }
-
-
-
-        /********************************************************************
-                                Reportes Usuario 
-         ********************************************************************/
 
     }
 }
